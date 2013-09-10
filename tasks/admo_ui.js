@@ -1,6 +1,6 @@
 /*
  * grunt-admo-ui
- * 
+ *
  *
  * Copyright (c) 2013 David Rubin
  */
@@ -8,10 +8,17 @@
 'use strict';
 
 module.exports = function(grunt) {
+
+  console.log("start task");
   var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+  console.log("lrSnippet")
   var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
   };
+
+  var path = require('path');
+
+  console.log("Before loading plugins");
   // load all grunt tasks
   var plugins = [
     "grunt-git-describe",
@@ -34,7 +41,7 @@ module.exports = function(grunt) {
     "grunt-contrib-compress"
   ];
   plugins.forEach(grunt.loadNpmTasks);
-
+  console.log("Loading plugins");
   // configurable paths
   var yeomanConfig = {
     app: 'app',
@@ -46,7 +53,7 @@ module.exports = function(grunt) {
   } catch (e) {
     console.log(e);
   }
-  
+
 
   grunt.initConfig({
     yeoman: yeomanConfig,
@@ -309,11 +316,11 @@ module.exports = function(grunt) {
     copy: {
       admoconfig:{
         files: [{
-          expand: true,
+          expand: false,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '.tmp',
-          src: ['scripts/libs/admo-config.js']
+         // cwd: '<%= yeoman.app %>',
+          dest: '.tmp/testme/',
+          src: [path.join(__dirname,'../templates/admo-config.js')]
         }]
       },
       dist: {
@@ -361,7 +368,7 @@ module.exports = function(grunt) {
   });
 
   console.log("After config");
- 
+
 
 console.log("testing");
   var serverList = [
@@ -405,7 +412,9 @@ console.log("testing");
     'preprocess:admoconfigDist',
     'compress'
   ];
-    console.log("before task");
+asdfasdfasdf
+  console.log("Tasking stuff" + path.join(__dirname,'../templates/admo-config.js'));
+  console.log("before task");
 
   grunt.registerTask('build', "Builds the pod files", function(app) {
     grunt.config('currentApp', app || 'flightcentre');

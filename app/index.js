@@ -38,7 +38,7 @@ AdmoGenerator.prototype.askFor = function askFor() {
 
 AdmoGenerator.prototype.app = function app() {
   this.mkdir('app');
-  this.mkdir('app/templates');
+  this.mkdir('cms');
 
   this.template('_package.json', 'package.json');
   this.template('_bower.json', 'bower.json');
@@ -47,4 +47,5 @@ AdmoGenerator.prototype.app = function app() {
 AdmoGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
   this.copy('Gruntfile.js', 'Gruntfile.js');
+  this.copy('gitignore', '.gitignore');
 };

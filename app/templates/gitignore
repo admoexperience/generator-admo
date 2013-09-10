@@ -1,0 +1,14 @@
+node_modules
+dist
+.tmp
+.sass-cache
+.DS_Store
+app/bower
+app/components
+app/apps/generic
+test-results.xml
+videos
+*.zip
+*.webm
+cms
+Thumbs.db
