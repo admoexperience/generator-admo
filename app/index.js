@@ -8,7 +8,8 @@ var AdmoGenerator = module.exports = function AdmoGenerator(args, options, confi
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    //We cant install this yet, since it hasn't been published yet
+    //this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -23,14 +24,13 @@ AdmoGenerator.prototype.askFor = function askFor() {
   console.log(this.yeoman);
 
   var prompts = [{
-    type: 'confirm',
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
-    default: true
+    type: 'string',
+    name: 'appName',
+    message: 'What would you like to call this app?',
   }];
 
   this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.appName = props.appName;
 
     cb();
   }.bind(this));
@@ -40,11 +40,11 @@ AdmoGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/templates');
 
-  this.copy('_package.json', 'package.json');
-  this.copy('_bower.json', 'bower.json');
+  this.template('_package.json', 'package.json');
+  this.template('_bower.json', 'bower.json');
 };
 
 AdmoGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
+  this.copy('Gruntfile.js', 'Gruntfile.js');
 };
