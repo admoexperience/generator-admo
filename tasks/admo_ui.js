@@ -66,14 +66,22 @@ module.exports = function(grunt) {
       },
     },
     preprocess: {
-      admoconfigLive : {
+      admoConfigLive : {
         src : '.tmp/scripts/libs/admo-config.js',
-        dest: '.tmp/scripts/libs/admo-config.js',
+        dest: '.tmp/scripts/libs/admo-config.js'
       },
-      admoconfigDist : {
-        src : '<%= yeoman.dist %>/scripts/libs/admo-config.js',
-        dest: '<%= yeoman.dist %>/scripts/libs/admo-config.js',
+      admoIndexLive : {
+        src : '.tmp/index.html',
+        dest: '.tmp/index.html'
       },
+      admoConfigDist : {
+        src : '.tmp/scripts/libs/admo-config.js',
+        dest: '<%= yeoman.dist %>/scripts/libs/admo-config.js'
+      },
+      admoIndexDist : {
+        src : '.tmp/index.html',
+        dest: '<%= yeoman.dist %>/index.html'
+      }
     },
     env: {
        options: {
@@ -94,25 +102,25 @@ module.exports = function(grunt) {
     },
     watch: {
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/apps/<%= grunt.config("currentApp") %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
       },
       livereload: {
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/apps/<%= grunt.config("currentApp") %>/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           //The config file is handled differently
           '!<%= yeoman.app %>/scripts/libs/admo-config.js',
+          '!<%= yeoman.app %>/index.html',
+          '<%= yeoman.app %>/{,*/}*.html',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['livereload']
       },
-      //Admo config is the only file that is needed to be preprocessed
-      admoconfig: {
-        files: ['<%= yeoman.app %>/scripts/libs/admo-config.js'],
-        tasks: ['copy:admoconfig','preprocess'],
+      admoIndex: {
+        files: ['<%= yeoman.app %>/index.html'],
+        tasks: ['copy:index','preprocess:admoIndexLive'],
         options: {
           livereload: true,
         },
@@ -166,22 +174,6 @@ module.exports = function(grunt) {
       },
       server: '.tmp'
     },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/**/*.js',
-        '!<%= yeoman.app %>/scripts/vendor/**/*.js',
-      ]
-    },
-    karma: {
-      unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
-      }
-    },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -200,10 +192,10 @@ module.exports = function(grunt) {
       },
       app:{
         options:{
-          specify: '<%= yeoman.app %>/apps/<%= grunt.config("currentApp") %>/styles/main.scss',
-          sassDir: '<%= yeoman.app %>/apps/<%= grunt.config("currentApp") %>/styles/',
+          specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
+          sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
           importPath: ['<%= yeoman.app %>/styles'],
-          cssDir: '.tmp/apps/<%= grunt.config("currentApp") %>/styles/',
+          cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
         }
       },
     },
@@ -248,8 +240,8 @@ module.exports = function(grunt) {
             '<%= yeoman.app %>/styles/{,*/}*.css'
           ],
           //Manually copy the main file
-          '<%= yeoman.dist %>/apps/<%= grunt.config("currentApp") %>/styles/main.css': [
-            '.tmp/apps/<%= grunt.config("currentApp") %>/styles/main.css',
+          '<%= yeoman.dist %>/<%= grunt.config("currentApp") %>/styles/main.css': [
+            '.tmp/<%= grunt.config("currentApp") %>/styles/main.css',
           ]
         }
       }
@@ -273,11 +265,6 @@ module.exports = function(grunt) {
           src: ['*.html', 'views/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
-      }
-    },
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
       }
     },
     ngmin: {
@@ -312,7 +299,8 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      admoconfig:{
+      //Copy the core framework from the NPM module into the .tmp dir for serving.
+      admoFramework:{
         files: [{
           expand: true,
           dot: true,
@@ -322,22 +310,32 @@ module.exports = function(grunt) {
           src: '**'
         }]
       },
-      dist: {
+      //Index file is pre-processed so it needs to be copied
+      index: {
         files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '.tmp',
+          src: ['index.html']
+        }]
+      },
+      dist: {
+        files: [ {
+          expand: true,
+          dot: true,
+          flatten: false,
+          cwd: path.join(__dirname,'../templates'),
+          dest: '<%= yeoman.dist %>',
+          src: '**'
+        },
+        {
           expand: true,
           dot: true,
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '*.{ico,txt}',
-            '.htaccess',
-            'emulator/**/*',
-            //Needed for the emulator. (useful to have even in prod mode)
-            'bower/jquery/jquery.js',
-            'scripts/**',
-            'apps/<%= grunt.config("currentApp") %>/**/*',
-            'images/**/*',
-            'styles/fonts/*'
+            '<%= grunt.config("currentApp") %>/**/*',
           ],
           filter: function(value){
             //Ignore all video files
@@ -376,8 +374,10 @@ console.log("testing");
     'clean:server',
     'compass',
     //Manually copy over the config and preprocess it
-    'copy:admoconfig',
-    'preprocess:admoconfigLive',
+    'copy:admoFramework',
+    'copy:index',
+    'preprocess:admoConfigLive',
+    'preprocess:admoIndexLive',
     'livereload-start',
     'connect:livereload',
     'open',
@@ -399,16 +399,20 @@ console.log("testing");
    // 'test',
     'compass',
     'useminPrepare',
+    'copy:admoFramework',
+    'copy:index',
+    'copy:dist',
+    'preprocess:admoConfigDist',
+    'preprocess:admoIndexDist',
     //'imagemin',
     'cssmin',
     'htmlmin',
     'concat',
-    'copy:dist',
+
     //'cdnify',
     'ngmin',
     'uglify',
     'usemin',
-    'preprocess:admoconfigDist',
     'compress'
   ];
 

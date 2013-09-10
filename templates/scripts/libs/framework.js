@@ -285,8 +285,8 @@ window.AdmoApp = BaseObject.create({
   },
 
   initApp: function(){
-    this.addCss('/apps/'+AdmoConfig.currentApp+'/styles/main.css');
-    this.addJavaScript('/apps/'+AdmoConfig.currentApp+'/main.js');
+    this.addCss('/'+AdmoConfig.currentApp+'/styles/main.css');
+    this.addJavaScript('/'+AdmoConfig.currentApp+'/main.js');
     angular.element(document).ready(function() {
         angular.bootstrap(document, ['admoWebuiApp']);
     });
