@@ -4,10 +4,7 @@ dist
 .tmp
 .sass-cache
 .DS_Store
-app/bower
-app/components
-app/apps/generic
-test-results.xml
+bower_components/
 videos
 *.zip
 *.webm

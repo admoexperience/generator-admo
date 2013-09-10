@@ -1,0 +1,55 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: -webkit-linear-gradient(top left, #556, #001);
+  font: 14px 'Segoe UI Light', Helvetica, Arial, sans-serif;
+}
+
+
+#screen {
+  width: 960px;
+  height: 540px;
+  margin: 20px auto;
+  border: 5px solid #444;
+  outline: 1px solid black;
+  overflow: hidden;
+}
+#iframe {
+  width: 1920px;
+  height: 1080px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+}
+
+#kinect-data{
+  position: absolute;
+  left: 10px;
+  top: 700px;
+}
+
+#controls {
+  text-align: center;
+}
+#controls button {
+  font-family: 'SegoeUI';
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: 10px 15px;
+}
+#controls button.toggle {
+  margin-left: 0;
+  margin-right: 0;
+}
+#controls button.left {
+  margin-left: 80px;
+  margin-right: 0;
+}
+#controls button.right {
+  margin-left: 0;
+}
+#controls button.active {
+  -webkit-filter: brightness(-0.3);
+}

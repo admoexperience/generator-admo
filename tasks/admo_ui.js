@@ -190,8 +190,6 @@ module.exports = function(grunt) {
         cssDir: '.tmp/styles',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: '<%= yeoman.app %>/bower',
         relativeAssets: true,
         debugInfo: true
       },
@@ -204,7 +202,7 @@ module.exports = function(grunt) {
         options:{
           specify: '<%= yeoman.app %>/apps/<%= grunt.config("currentApp") %>/styles/main.scss',
           sassDir: '<%= yeoman.app %>/apps/<%= grunt.config("currentApp") %>/styles/',
-          importPath: ['<%= yeoman.app %>/bower','<%= yeoman.app %>/styles'],
+          importPath: ['<%= yeoman.app %>/styles'],
           cssDir: '.tmp/apps/<%= grunt.config("currentApp") %>/styles/',
         }
       },
