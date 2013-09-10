@@ -1,5 +1,5 @@
 AdmoConfig = BaseObject.create({
-
+  //david
     screenWidth: 1920.0,
     screenHeight:1080.0,
 

@@ -1,2 +1,16 @@
 node_modules/
 temp/
+dist
+.tmp
+.sass-cache
+.DS_Store
+app/bower
+app/components
+app/apps/generic
+test-results.xml
+videos
+*.zip
+*.webm
+cms
+Thumbs.db
+*.log

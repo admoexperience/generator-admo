@@ -316,11 +316,12 @@ module.exports = function(grunt) {
     copy: {
       admoconfig:{
         files: [{
-          expand: false,
+          expand: true,
           dot: true,
-         // cwd: '<%= yeoman.app %>',
-          dest: '.tmp/testme/',
-          src: [path.join(__dirname,'../templates/admo-config.js')]
+          flatten: false,
+          cwd: path.join(__dirname,'../templates'),
+          dest: '.tmp/',
+          src: '**'
         }]
       },
       dist: {
@@ -412,8 +413,8 @@ console.log("testing");
     'preprocess:admoconfigDist',
     'compress'
   ];
-asdfasdfasdf
-  console.log("Tasking stuff" + path.join(__dirname,'../templates/admo-config.js'));
+
+  console.log('<%= yeoman.app %>  ' + path.join(__dirname,'../templates/admo-config.js'));
   console.log("before task");
 
   grunt.registerTask('build', "Builds the pod files", function(app) {
