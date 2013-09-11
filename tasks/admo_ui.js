@@ -36,7 +36,6 @@ module.exports = function(grunt) {
     "grunt-contrib-cssmin",
     "grunt-contrib-htmlmin",
     "grunt-contrib-concat",
-    "grunt-ngmin",
     "grunt-contrib-uglify",
     "grunt-contrib-compress"
   ];
@@ -79,7 +78,7 @@ module.exports = function(grunt) {
         dest: '<%= yeoman.dist %>/scripts/libs/admo-config.js'
       },
       admoIndexDist : {
-        src : '.tmp/index.html',
+        src : '<%= yeoman.dist %>/index.html',
         dest: '<%= yeoman.dist %>/index.html'
       }
     },
@@ -249,31 +248,12 @@ module.exports = function(grunt) {
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= yeoman.dist %>',
           src: ['*.html', 'views/*.html'],
           dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
-    ngmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
-          src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
         }]
       }
     },
@@ -335,9 +315,10 @@ module.exports = function(grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '<%= grunt.config("currentApp") %>/**/*',
+            '**/*',
           ],
           filter: function(value){
+            console.log("Copying over "+value);
             //Ignore all video files
             var lowercase = value.toLowerCase();
             var filtered = ['videos','.webm','cms'];
@@ -395,24 +376,20 @@ console.log("testing");
     'git-describe',
     'env',
     'clean:dist',
-   // 'jshint',
-   // 'test',
     'compass',
     'useminPrepare',
     'copy:admoFramework',
-    'copy:index',
     'copy:dist',
+    'copy:index',
     'preprocess:admoConfigDist',
     'preprocess:admoIndexDist',
-    //'imagemin',
+    'imagemin',
     'cssmin',
     'htmlmin',
     'concat',
 
-    //'cdnify',
-    'ngmin',
-    'uglify',
-    'usemin',
+    //Doesn't seem to create a bower script or it puts it in the wrong folder
+    // 'usemin',
     'compress'
   ];
 
