@@ -47,13 +47,6 @@ module.exports = function(grunt) {
     dist: 'dist'
   };
 
-  try {
-    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-  } catch (e) {
-    console.log(e);
-  }
-
-
   grunt.initConfig({
     yeoman: yeomanConfig,
     "git-describe": {
@@ -84,16 +77,12 @@ module.exports = function(grunt) {
     },
     env: {
        options: {
-         // Shared options hash.
-        BUGSNAG_API_KEY: '3f44cc38e81c599ebf780eb2bb4b4c7d',
-        GIT_COMMIT: '<%= grunt.config("GIT_COMMIT") || "not set" %>',
-        CURRENT_APP: '<%= grunt.config("currentApp") %>',
-        ENVIRONMENT: '<%= grunt.config("currentEnvironment") || "development" %>',
-        POD_COMPILE_DATE: new Date(),
-
-        //@deprecated, do not use.
-        //Value should come from the CMS
-        MIXPANEL_API_KEY: '94bd8630e2a2959000336806b57ad883'
+           // Shared options hash.
+          BUGSNAG_API_KEY: '3f44cc38e81c599ebf780eb2bb4b4c7d',
+          GIT_COMMIT: '<%= grunt.config("GIT_COMMIT") || "not set" %>',
+          CURRENT_APP: '<%= grunt.config("currentApp") %>',
+          ENVIRONMENT: '<%= grunt.config("currentEnvironment") || "development" %>',
+          POD_COMPILE_DATE: new Date(),
        },
        setEnv:{
 
@@ -193,7 +182,7 @@ module.exports = function(grunt) {
         options:{
           specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
           sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
-          importPath: ['<%= yeoman.app %>/styles'],
+          importPath: ['<%= yeoman.app %>/styles', '<%= yeoman.app %>/components',],
           cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
         }
       },
@@ -297,11 +286,19 @@ module.exports = function(grunt) {
           dot: true,
           cwd: '<%= yeoman.app %>',
           dest: '.tmp',
-          src: ['index.html']
+          src: ['_include.html']
         }]
       },
       dist: {
-        files: [ {
+        files: [
+        {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>',
+          src: ['_include.html']
+        },
+        {
           expand: true,
           dot: true,
           flatten: false,
@@ -345,12 +342,8 @@ module.exports = function(grunt) {
     }
   });
 
-  console.log("After config");
-
-
-console.log("testing");
   var serverList = [
-    'git-describe',
+   // 'git-describe',
     'env',
     'clean:server',
     'compass',
@@ -393,8 +386,6 @@ console.log("testing");
     'compress'
   ];
 
-  console.log('<%= yeoman.app %>  ' + path.join(__dirname,'../templates/admo-config.js'));
-  console.log("before task");
 
   grunt.registerTask('build', "Builds the pod files", function(app) {
     grunt.config('currentApp', app || 'flightcentre');
@@ -402,12 +393,10 @@ console.log("testing");
     grunt.config('currentEnvironment', 'production');
     grunt.task.run(buildList);
   });
-  console.log("Default task");
 
   grunt.registerTask('server', "Serves the content via the built in web server", function(app) {
     grunt.config('currentApp', app || 'flightcentre');
     grunt.task.run(serverList);
-
   });
 
   grunt.registerTask('default', ['build']);
