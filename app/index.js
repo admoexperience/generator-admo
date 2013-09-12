@@ -43,23 +43,22 @@ AdmoGenerator.prototype.app = function app() {
   this.mkdir('app/'+this.appName+'/styles');
   this.mkdir('app/'+this.appName+'/data/');
 
-  this.mkdir('app/scripts/vendor');
-  this.mkdir('app/scripts/components');
-  this.mkdir('app/styles');
+  this.mkdir('app/scripts');
+  this.mkdir('app/components');
   this.mkdir('cms');
 
   this.mkdir('dist');
 
   this.template('_package.json', 'package.json');
   this.template('_app-main.scss', 'app/'+this.appName+'/styles/main.scss');
-  this.template('_shared-main.scss', 'app/styles/main.scss');
   this.template('_bower.json', 'bower.json');
   this.template('_app-main.js', 'app/'+this.appName+'/main.js');
+  this.copy('include.html', 'app/_include.html');
 };
 
 AdmoGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('gitignore', '.gitignore');
-  this.copy('include.html', '_include.html');
+
 };

@@ -51,7 +51,9 @@ module.exports = function(grunt) {
     yeoman: yeomanConfig,
     "git-describe": {
       "options": {
-        prop: 'GIT_COMMIT'
+        prop: 'GIT_COMMIT',
+        //Fail siliently if running the server in dev mode
+        failOnError: grunt.config("currentEnvironment") == 'production'
       },
       "describe": {
         // Target-specific file lists and/or options go here.
@@ -343,7 +345,7 @@ module.exports = function(grunt) {
   });
 
   var serverList = [
-   // 'git-describe',
+    'git-describe',
     'env',
     'clean:server',
     //Manually copy over the config and preprocess it
