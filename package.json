@@ -92,6 +92,7 @@
     "grunt-git-describe": "~2.0.2",
     "grunt-preprocess": "~2.3.0",
     "grunt-env": "~0.4.0",
+    "glob": "3.2.6",
     "yo": ">=1.0.0"
   },
   "engines": {
