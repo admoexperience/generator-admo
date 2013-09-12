@@ -53,6 +53,7 @@ module.exports = function(grunt) {
 
 
   var config = loadConfig(path.join(__dirname, 'options'));
+  console.log(config.open);
 
   grunt.initConfig(config);
 
@@ -71,13 +72,6 @@ module.exports = function(grunt) {
     'open',
     'watch'
   ];
-
-  grunt.registerTask('test', [
-    'clean:server',
-    'compass',
-    'connect:test',
-    'karma'
-  ]);
 
   var buildList =    [
     'git-describe',

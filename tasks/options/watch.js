@@ -1,24 +1,23 @@
-module.export = {
+module.exports = {
   compass: {
-    files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}', '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/{,*/}*.{scss,sass}'],
+    files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
     tasks: ['compass']
   },
   livereload: {
     files: [
-      '{.tmp,<%= yeoman.app %>}/apps/<%= grunt.config("currentApp") %>/styles/{,*/}*.css',
-      '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-      '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+      '{.tmp,<%= yeoman.app %>}/<%= grunt.config("currentApp") %>/styles/*.css',
+      '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
       //The config file is handled differently
       '!<%= yeoman.app %>/scripts/libs/admo-config.js',
-      '!<%= yeoman.app %>/index.html',
-      '<%= yeoman.app %>/{,*/}*.html',
-      '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+      '!<%= yeoman.app %>/_include.html',
+      '<%= yeoman.app %>/**/*.html',
+      '<%= yeoman.app %>/**/*.{png,jpg,jpeg,gif,webp,svg}'
     ],
     tasks: ['livereload']
   },
   admoIndex: {
-    files: ['<%= yeoman.app %>/index.html'],
-    tasks: ['copy:index', 'preprocess:admoIndexLive'],
+    files: ['**/_include.html'],
+    tasks: ['copy:admoIndexFramework','copy:index', 'preprocess:admoIndexLive'],
     options: {
       livereload: true,
     },

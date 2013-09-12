@@ -1,5 +1,4 @@
 var path = require('path');
-console.log("copy task");
 console.log(path.join(__dirname, '../../templates'));
 module.exports = {
   //Copy the core framework from the NPM module into the .tmp dir for serving.
@@ -11,6 +10,16 @@ module.exports = {
       cwd: path.join(__dirname, '../../templates'),
       dest: '.tmp/',
       src: '**'
+    }]
+  },
+  admoIndexFramework: {
+    files: [{
+      expand: true,
+      dot: true,
+      flatten: false,
+      cwd: path.join(__dirname, '../../templates'),
+      dest: '.tmp/',
+      src: ['index.html','_framework.html']
     }]
   },
   //Index file is pre-processed so it needs to be copied
