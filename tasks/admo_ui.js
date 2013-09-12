@@ -9,9 +9,6 @@
 
 module.exports = function(grunt) {
 
-
-
-
   var path = require('path');
 
   function loadConfig(folderPath) {
@@ -20,14 +17,18 @@ module.exports = function(grunt) {
     var key;
 
     glob.sync('*', {cwd: folderPath}).forEach(function(option) {
-      console.log(option);
-      key = option.replace(/\.js$/,'');
+      key = option.replace(/\.js$/, '');
       object[key] = require(path.join(folderPath, option));
     });
     return object;
-  }
+  };
 
-
+  function getAppName(){
+    var fs = require('fs');
+    var packageJson = fs.readFileSync( "package.json" );
+    var app = JSON.parse(packageJson).name;
+    return app;
+  };
 
   // load all grunt tasks
   var plugins = [
@@ -53,7 +54,6 @@ module.exports = function(grunt) {
 
 
   var config = loadConfig(path.join(__dirname, 'options'));
-  console.log(config.open);
 
   grunt.initConfig(config);
 
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     'watch'
   ];
 
-  var buildList =    [
+  var buildList = [
     'git-describe',
     'env',
     'clean:dist',
@@ -88,7 +88,6 @@ module.exports = function(grunt) {
     'cssmin',
     'htmlmin',
     'concat',
-
     //Doesn't seem to create a bower script or it puts it in the wrong folder
     // 'usemin',
     'compress'
@@ -96,14 +95,14 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build', "Builds the pod files", function(app) {
-    grunt.config('currentApp', app || 'flightcentre');
+    grunt.config('currentApp', getAppName());
     //Ideally should come from the C# app but for now compiled builds are production
     grunt.config('currentEnvironment', 'production');
     grunt.task.run(buildList);
   });
 
   grunt.registerTask('server', "Serves the content via the built in web server", function(app) {
-    grunt.config('currentApp', app || 'flightcentre');
+    grunt.config('currentApp', getAppName());
     grunt.task.run(serverList);
   });
 
