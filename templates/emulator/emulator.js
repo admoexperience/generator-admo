@@ -179,7 +179,7 @@ $(function () {
 
   // Hacked delay to let the child frame finish loading
    $('#iframe').load(function(){
-    console.log('laod the iframe');
+    console.log('Loaded the iframe');
     getIA();
     var phase = Storage.get('phase') || 1;
     setPhase(phase);
@@ -199,7 +199,10 @@ $(function () {
          }
          x.appendTo('#screens');
       }
-      IA.setScreen(IA.Screens[currentScreen]);
+      //The value in storage might be for a different app or screen no longer there.
+      if(currentScreen && IA.Screens[currentScreen]){
+        IA.setScreen(IA.Screens[currentScreen]);
+      }
     }, 400);
   });
 
