@@ -4,7 +4,7 @@ dist
 .tmp
 .sass-cache
 .DS_Store
-bower_components/
+.bower_components/
 videos
 *.zip
 *.webm
