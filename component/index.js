@@ -32,17 +32,8 @@ Generator.prototype.askFor = function askFor() {
 };
 
 Generator.prototype.createFiles = function createFiles() {
-
-  //Work out what the app is bassed on the current folder.
-  //Not ideal but until we have a .admo properties file this is good enough
-  var folders = fs.readdirSync('app');
-  var app = null;
-  folders.forEach(function(f){
-    if (fs.lstatSync('app/'+f).isDirectory()){
-      app = f;
-    }
-  });
-  //TODO: fix app pathing.
+  var packageJson = fs.readFileSync( "package.json" );
+  var app = JSON.parse(packageJson).name;
   this.mkdir('app/'+app+'/components/'+this.component);
   this.write('app/'+app+'/components/'+this.component+'/'+this.component+'.js', '//Fill this with your own file');
   this.write('app/'+app+'/components/'+this.component+'/'+this.component+'.scss', '//Fill this with your own file');
