@@ -1,0 +1,60 @@
+/** Sane default so the values are on the screen*/
+* {
+  position: absolute;
+}
+
+html {
+  @include screen-size;
+  margin: 0;
+  padding: 0;
+  font-family: $defaultFont;
+  color: #FFFFFF;
+}
+
+body {
+  @include screen-size;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: $defaultFont;
+  color: #333;
+  position:absolute;
+  background-color: #000000;
+}
+
+/* When the code is compiled it has a top setting so the video feed isn't completely covered. */
+#screen-container {
+  top: 0px;
+}
+
+h1,h2,h3,h4,h5,h6,strong {
+  font-weight: normal;
+  font-family: $boldFont
+}
+
+.component.fixed, .component.follow {
+  position: absolute;
+}
+
+
+.animate {
+  -webkit-transition: ease 500ms;
+}
+
+#video {
+  @include screen-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  -webkit-transform: scaleX(-1);
+  /*
+  -webkit-filter: contrast(1.1) saturate(2) sepia(50%);
+
+  -webkit-filter: contrast(1.2) brightness(1.2);
+  */
+}
+
+#video {
+  background-color: #999999;
+}

@@ -164,7 +164,7 @@ module.exports = function(grunt) {
     },
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
+        sassDir: '.tmp/styles',
         //This allows us to compile the main file first.
         //The main file will include all the others to compile them
         cssDir: '.tmp/styles',
@@ -175,14 +175,14 @@ module.exports = function(grunt) {
       },
       main: {
         options: {
-          specify: ['<%= yeoman.app %>/styles/main.scss']
+          specify: ['.tmp/styles/main.scss']
         }
       },
       app:{
         options:{
           specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
           sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
-          importPath: ['<%= yeoman.app %>/styles', '<%= yeoman.app %>/components',],
+          importPath: ['.tmp/styles', '<%= yeoman.app %>/components',],
           cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
         }
       },
@@ -346,10 +346,10 @@ module.exports = function(grunt) {
    // 'git-describe',
     'env',
     'clean:server',
-    'compass',
     //Manually copy over the config and preprocess it
     'copy:admoFramework',
     'copy:index',
+    'compass',
     'preprocess:admoConfigLive',
     'preprocess:admoIndexLive',
     'livereload-start',
@@ -369,11 +369,11 @@ module.exports = function(grunt) {
     'git-describe',
     'env',
     'clean:dist',
-    'compass',
     'useminPrepare',
     'copy:admoFramework',
     'copy:dist',
     'copy:index',
+    'compass',
     'preprocess:admoConfigDist',
     'preprocess:admoIndexDist',
     'imagemin',

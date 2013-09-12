@@ -1,0 +1,9 @@
+/* Will be compiled down to a single stylesheet with your sass files */
+
+/* Vars */
+@import "variables";
+
+/* Screens and global stuff*/
+@import "global";
+@import "screen";
+@import "animate";

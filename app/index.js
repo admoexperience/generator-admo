@@ -61,4 +61,5 @@ AdmoGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('gitignore', '.gitignore');
+  this.copy('include.html', '_include.html');
 };

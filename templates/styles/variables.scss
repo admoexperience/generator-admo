@@ -1,0 +1,14 @@
+/** Variables **/
+
+$screenWidth: 1920px;
+$screenHeight: 1080px;
+$defaultFont: 'Verdana', 'sans-serif';
+$boldFont: 'SegoeUI-SemiBold', 'Segoe UI SemiBold';
+$blackGradient: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+
+/**** Defaults ******/
+
+@mixin screen-size {
+  width: $screenWidth;
+  height: $screenHeight;
+}
