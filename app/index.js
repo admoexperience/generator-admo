@@ -9,7 +9,7 @@ var AdmoGenerator = module.exports = function AdmoGenerator(args, options, confi
 
   this.on('end', function () {
     //We cant install this yet, since it hasn't been published yet
-    //this.installDependencies({ skipInstall: options['skip-install'] });
+    this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -42,11 +42,11 @@ AdmoGenerator.prototype.app = function app() {
   this.mkdir('app/'+this.appName+'/images');
   this.mkdir('app/'+this.appName+'/styles');
   this.mkdir('app/'+this.appName+'/data/');
+  this.mkdir('app/'+this.appName+'components');
+  this.mkdir('app/'+this.appName+'scripts');
 
-  this.mkdir('app/scripts');
-  this.mkdir('app/components');
+  //Thse folders aren't checked into git
   this.mkdir('cms');
-
   this.mkdir('dist');
 
   this.template('_package.json', 'package.json');

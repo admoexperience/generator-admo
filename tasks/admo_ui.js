@@ -9,16 +9,13 @@
 
 module.exports = function(grunt) {
 
-  console.log("start task");
   var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-  console.log("lrSnippet")
   var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
   };
 
   var path = require('path');
 
-  console.log("Before loading plugins");
   // load all grunt tasks
   var plugins = [
     "grunt-git-describe",
@@ -184,7 +181,7 @@ module.exports = function(grunt) {
         options:{
           specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
           sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
-          importPath: ['.tmp/styles', '<%= yeoman.app %>/components',],
+          importPath: ['.tmp/styles', '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/components',],
           cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
         }
       },
@@ -317,7 +314,6 @@ module.exports = function(grunt) {
             '**/*',
           ],
           filter: function(value){
-            console.log("Copying over "+value);
             //Ignore all video files
             var lowercase = value.toLowerCase();
             var filtered = ['videos','.webm','cms'];
