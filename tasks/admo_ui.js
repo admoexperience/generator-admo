@@ -9,12 +9,25 @@
 
 module.exports = function(grunt) {
 
-  var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-  var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
-  };
+
+
 
   var path = require('path');
+
+  function loadConfig(folderPath) {
+    var glob = require('glob');
+    var object = {};
+    var key;
+
+    glob.sync('*', {cwd: folderPath}).forEach(function(option) {
+      console.log(option);
+      key = option.replace(/\.js$/,'');
+      object[key] = require(path.join(folderPath, option));
+    });
+    return object;
+  }
+
+
 
   // load all grunt tasks
   var plugins = [
@@ -37,308 +50,11 @@ module.exports = function(grunt) {
     "grunt-contrib-compress"
   ];
   plugins.forEach(grunt.loadNpmTasks);
-  console.log("Loading plugins");
-  // configurable paths
-  var yeomanConfig = {
-    app: 'app',
-    dist: 'dist'
-  };
 
-  grunt.initConfig({
-    yeoman: yeomanConfig,
-    "git-describe": {
-      "options": {
-        prop: 'GIT_COMMIT',
-        //Fail siliently if running the server in dev mode
-        failOnError: grunt.config("currentEnvironment") == 'production'
-      },
-      "describe": {
-        // Target-specific file lists and/or options go here.
-      },
-    },
-    preprocess: {
-      admoConfigLive : {
-        src : '.tmp/scripts/libs/admo-config.js',
-        dest: '.tmp/scripts/libs/admo-config.js'
-      },
-      admoIndexLive : {
-        src : '.tmp/index.html',
-        dest: '.tmp/index.html'
-      },
-      admoConfigDist : {
-        src : '.tmp/scripts/libs/admo-config.js',
-        dest: '<%= yeoman.dist %>/scripts/libs/admo-config.js'
-      },
-      admoIndexDist : {
-        src : '<%= yeoman.dist %>/index.html',
-        dest: '<%= yeoman.dist %>/index.html'
-      }
-    },
-    env: {
-       options: {
-           // Shared options hash.
-          BUGSNAG_API_KEY: '3f44cc38e81c599ebf780eb2bb4b4c7d',
-          GIT_COMMIT: '<%= grunt.config("GIT_COMMIT") || "not set" %>',
-          CURRENT_APP: '<%= grunt.config("currentApp") %>',
-          ENVIRONMENT: '<%= grunt.config("currentEnvironment") || "development" %>',
-          POD_COMPILE_DATE: new Date(),
-       },
-       setEnv:{
 
-       }
-    },
-    watch: {
-      compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass']
-      },
-      livereload: {
-        files: [
-          '{.tmp,<%= yeoman.app %>}/apps/<%= grunt.config("currentApp") %>/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          //The config file is handled differently
-          '!<%= yeoman.app %>/scripts/libs/admo-config.js',
-          '!<%= yeoman.app %>/index.html',
-          '<%= yeoman.app %>/{,*/}*.html',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['livereload']
-      },
-      admoIndex: {
-        files: ['<%= yeoman.app %>/index.html'],
-        tasks: ['copy:index','preprocess:admoIndexLive'],
-        options: {
-          livereload: true,
-        },
-      },
-    },
-    connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0'
-      },
-      livereload: {
-        options: {
-          middleware: function (connect) {
-            return [
-              lrSnippet,
-              mountFolder(connect, 'cms'),
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
-            ];
-          }
-        }
-      }
-    },
-    open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>/emulator'
-      }
-    },
-    clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
-          ]
-        }]
-      },
-      server: '.tmp'
-    },
-    compass: {
-      options: {
-        sassDir: '.tmp/styles',
-        //This allows us to compile the main file first.
-        //The main file will include all the others to compile them
-        cssDir: '.tmp/styles',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        relativeAssets: true,
-        debugInfo: true
-      },
-      main: {
-        options: {
-          specify: ['.tmp/styles/main.scss']
-        }
-      },
-      app:{
-        options:{
-          specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
-          sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
-          importPath: ['.tmp/styles', '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/components',],
-          cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
-        }
-      },
-    },
-    concat: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '.tmp/scripts/{,*/}*.js',
-            '<%= yeoman.app %>/scripts/{,*/}*.js'
-          ]
-        }
-      }
-    },
-    useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
-      options: {
-        dest: '<%= yeoman.dist %>'
-      }
-    },
-    usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      options: {
-        dirs: ['<%= yeoman.dist %>']
-      }
-    },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '**/*',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    cssmin: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= yeoman.app %>/styles/{,*/}*.css'
-          ],
-          //Manually copy the main file
-          '<%= yeoman.dist %>/<%= grunt.config("currentApp") %>/styles/main.css': [
-            '.tmp/<%= grunt.config("currentApp") %>/styles/main.css',
-          ]
-        }
-      }
-    },
-    htmlmin: {
-      dist: {
-        options: {
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
-    rev: {
-      dist: {
-        files: {
-          src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
-          ]
-        }
-      }
-    },
-    copy: {
-      //Copy the core framework from the NPM module into the .tmp dir for serving.
-      admoFramework:{
-        files: [{
-          expand: true,
-          dot: true,
-          flatten: false,
-          cwd: path.join(__dirname,'../templates'),
-          dest: '.tmp/',
-          src: '**'
-        }]
-      },
-      //Index file is pre-processed so it needs to be copied
-      index: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '.tmp',
-          src: ['_include.html']
-        }]
-      },
-      dist: {
-        files: [
-        {
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: ['_include.html']
-        },
-        {
-          expand: true,
-          dot: true,
-          flatten: false,
-          cwd: path.join(__dirname,'../templates'),
-          dest: '<%= yeoman.dist %>',
-          src: '**'
-        },
-        {
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            '**/*',
-          ],
-          filter: function(value){
-            //Ignore all video files
-            var lowercase = value.toLowerCase();
-            var filtered = ['videos','.webm','cms'];
-            for(var i in filtered){
-              var value = filtered[i];
-               if(lowercase.indexOf(value) !== -1){
-                return false;
-              }
-            }
-            return true;
-          }
-        }]
-      }
-    },
-    compress : {
-      main : {
-        options : {
-          archive : 'dist-<%= grunt.config("currentApp") %>.pod.zip'
-        },
-        files : [
-         { expand: true, src : "**/*", cwd : "dist/" }
-        ]
-      }
-    }
-  });
+  var config = loadConfig(path.join(__dirname, 'options'));
+
+  grunt.initConfig(config);
 
   var serverList = [
     'git-describe',
