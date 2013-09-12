@@ -2,12 +2,13 @@
   "name": "generator-admo",
   "version": "0.0.0",
   "description": "A generator for Yeoman",
+  "private": "true",
   "keywords": [
     "yeoman-generator"
   ],
-  "homepage": "https://github.com/drubin/generator-admo",
+  "homepage": "https://bitbucket.org/fireid/admo-generator",
   "bugs": {
-    "url": "https://github.com/drubin/generator-admo/issues"
+    "url": "https://bitbucket.org/fireid/admo-generator"
   },
   "author": {
     "name": "David Rubin",
@@ -16,7 +17,7 @@
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/drubin/generator-admo.git"
+    "url": "git@bitbucket.org:fireid/admo-generator.git"
   },
   "scripts": {
     "test": "mocha"
@@ -37,7 +38,6 @@
     "grunt-usemin": "~0.1.10",
     "grunt-regarde": "~0.1.1",
     "grunt-rev": "~0.1.0",
-    "grunt-karma": "~0.3.0",
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.1",
     "grunt-contrib-compress": "~0.4.0",
@@ -62,7 +62,6 @@
     "grunt-usemin": "~0.1.10",
     "grunt-regarde": "~0.1.1",
     "grunt-rev": "~0.1.0",
-    "grunt-karma": "~0.3.0",
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.1",
     "grunt-contrib-compress": "~0.4.0",
@@ -72,29 +71,7 @@
     "mocha": "~1.12.0"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-copy": "~0.4.0",
-    "grunt-contrib-concat": "~0.1.3",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-compass": "~0.1.3",
-    "grunt-contrib-jshint": "~0.3.0",
-    "grunt-contrib-cssmin": "~0.5.0",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-htmlmin": "~0.1.1",
-    "grunt-contrib-imagemin": "~0.1.2",
-    "grunt-contrib-livereload": "~0.1.2",
-    "grunt-usemin": "~0.1.10",
-    "grunt-regarde": "~0.1.1",
-    "grunt-rev": "~0.1.0",
-    "grunt-karma": "~0.3.0",
-    "grunt-open": "~0.2.0",
-    "matchdep": "~0.1.1",
-    "grunt-contrib-compress": "~0.4.0",
-    "grunt-git-describe": "~2.0.2",
-    "grunt-preprocess": "~2.3.0",
-    "grunt-env": "~0.4.0",
-    "yo": ">=1.0.0-rc.1"
+    "yo": ">=1.0.0"
   },
   "engines": {
     "node": ">=0.8.0",
@@ -105,7 +82,7 @@
       "type": "NA"
     }
   ],
-  "readme": "# generator-admo [![Build Status](https://secure.travis-ci.org/drubin/generator-admo.png?branch=master)](https://travis-ci.org/drubin/generator-admo)\n\nA generator for [Yeoman](http://yeoman.io).\n\n\n## Getting Started\n\n### What is Yeoman?\n\nTrick question. It's not a thing. It's this guy:\n\n![](http://i.imgur.com/JHaAlBJ.png)\n\nBasically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.\n\nNot every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*\n\n```\n$ npm install -g yo\n```\n\n### Yeoman Generators\n\nYeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.\n\nTo install generator-admo from npm, run:\n\n```\n$ npm install -g generator-admo\n```\n\nFinally, initiate the generator:\n\n```\n$ yo admo\n```\n\n### Getting To Know Yeoman\n\nYeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.\n\nIf you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).\n\n\n## License\n\n[MIT License](http://en.wikipedia.org/wiki/MIT_License)\n",
+  "readme": "",
   "readmeFilename": "README.md",
   "_id": "generator-admo@0.0.0",
   "dist": {
