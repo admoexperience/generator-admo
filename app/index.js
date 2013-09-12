@@ -42,8 +42,8 @@ AdmoGenerator.prototype.app = function app() {
   this.mkdir('app/'+this.appName+'/images');
   this.mkdir('app/'+this.appName+'/styles');
   this.mkdir('app/'+this.appName+'/data/');
-  this.mkdir('app/'+this.appName+'components');
-  this.mkdir('app/'+this.appName+'scripts');
+  this.mkdir('app/'+this.appName+'/components');
+  this.mkdir('app/'+this.appName+'/scripts');
 
   //Thse folders aren't checked into git
   this.mkdir('cms');
