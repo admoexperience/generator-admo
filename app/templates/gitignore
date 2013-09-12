@@ -10,5 +10,6 @@ test-results.xml
 videos
 *.zip
 *.webm
+*.log
 cms
 Thumbs.db
