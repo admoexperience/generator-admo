@@ -19,7 +19,7 @@ module.exports = {
       flatten: false,
       cwd: path.join(__dirname, '../../templates'),
       dest: '.tmp/',
-      src: ['index.html','_framework.html']
+      src: ['index.html', '_framework.html']
     }]
   },
   //Index file is pre-processed so it needs to be copied
@@ -36,36 +36,19 @@ module.exports = {
     files: [{
       expand: true,
       dot: true,
+      flatten: false,
       cwd: '<%= yeoman.app %>',
       dest: '<%= yeoman.dist %>',
-      src: ['_include.html']
-    }, {
+      src: ['**','!index.html']
+    },
+
+    {
       expand: true,
       dot: true,
       flatten: false,
-      cwd: path.join(__dirname, '../templates'),
+      cwd: '.tmp',
       dest: '<%= yeoman.dist %>',
       src: '**'
-    }, {
-      expand: true,
-      dot: true,
-      cwd: '<%= yeoman.app %>',
-      dest: '<%= yeoman.dist %>',
-      src: [
-        '**/*',
-      ],
-      filter: function(value) {
-        //Ignore all video files
-        var lowercase = value.toLowerCase();
-        var filtered = ['videos', '.webm', 'cms'];
-        for (var i in filtered) {
-          var value = filtered[i];
-          if (lowercase.indexOf(value) !== -1) {
-            return false;
-          }
-        }
-        return true;
-      }
     }]
   }
 }
