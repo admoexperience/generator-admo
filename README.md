@@ -45,12 +45,12 @@ Working with Admo:
 
 admo
   
-  mkdir admo-app-$app-name
-  yo admo #when prompted for an appname PLEASE enter $app-name
+    mkdir admo-app-$app-name
+    yo admo #when prompted for an appname PLEASE enter $app-name
 
-  git init 
-  git add .
-  git commit -m "First commit empty admo project"
+    git init 
+    git add .
+    git commit -m "First commit empty admo project"
 
 components
 `yo admo:component $component-name`  this will create required js + scss files, You will manually need to add them to
