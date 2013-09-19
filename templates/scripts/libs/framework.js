@@ -43,6 +43,9 @@ AlchemyServer.MessageReceived = function(event){
           case 'kinectState':
             AdmoApp.handleGesture(eventData.data);
             break;
+          case 'swipeGesture':
+            AdmoApp.handleSwipe(eventData.data);
+            break;
           case 'config':
             AdmoApp.handleConfig(eventData.data);
             break;
@@ -169,21 +172,35 @@ window.AdmoApp = BaseObject.create({
         //We don't have any person data yet.
       }else if (this.currentState == 2){
         var h = KinectState.head;
-        User.updateObj(User.head,h.x,h.y,h.z);
+        User.updateObj(User.head,h.x,h.y,h.z, h.xmm, h.ymm);
       }
       else if (this.currentState == 3)
       {
         var h = KinectState.head;
         var l = KinectState.leftHand;
         var r = KinectState.rightHand;
-        User.updateObj(User.head,h.x,h.y,h.z);
+        var el = KinectState.leftElbow;
+        var er = KinectState.rightElbow;
+        User.updateObj(User.head,h.x,h.y,h.z, h.xmm, h.ymm);
 
-        User.updateObj(User.hands.left, l.x,l.y,l.z);
-        User.updateObj(User.hands.right, r.x,r.y,r.z);
+        User.updateObj(User.hands.left, l.x,l.y,l.z, l.xmm, l.ymm);
+        User.updateObj(User.hands.right, r.x,r.y,r.z, r.xmm, r.ymm);
+
+        User.updateObj(User.elbows.left, el.x, el.y, el.z, el.xmm, el.ymm);
+        User.updateObj(User.elbows.right, er.x, er.y, er.z, er.xmm, er.ymm);
       }
       //Tell the app the state has changed
       this.setState(KinectState.phase);
     }
+  },
+
+  handleSwipe: function(message, forced) {
+    console.log(message);
+    this.swipeGesture(message);
+  },
+
+  swipeGesture: function(gesture) {
+    //Apps should implement this method is they would like to recieve swipeEvents
   },
 
   initAnimationLoop: function() {
