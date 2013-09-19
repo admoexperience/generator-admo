@@ -16,19 +16,41 @@ KinectState = {
   head:{
     x:0,
     y:0,
-    z:0
+    z:0,
+    xmm:0,
+    ymm:0
   },
 
   leftHand:{
     x:0,
     y:0,
-    z:0
+    z:0,
+    xmm:0,
+    ymm:0
   },
 
   rightHand: {
     x:0,
     y:0,
-    z:0
+    z:0,
+    xmm:0,
+    ymm:0
+  },
+
+  leftElbow: {
+    x:0,
+    y:0,
+    z:0,
+    xmm:0,
+    ymm:0
+  },
+
+  rightElbow: {
+    x:0,
+    y:0,
+    z:0,
+    xmm:0,
+    ymm:0
   },
 
   face: {

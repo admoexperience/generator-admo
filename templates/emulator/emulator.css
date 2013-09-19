@@ -53,3 +53,9 @@ html, body {
 #controls button.active {
   -webkit-filter: brightness(-0.3);
 }
+#controls button.swiperight {
+  margin-left: 0;
+}
+#controls button.swipeleft {
+  margin-left: 0;
+}

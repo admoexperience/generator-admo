@@ -18,6 +18,22 @@
     y:0,
     z:1400
   },
+/*
+  since it is not really possible to set the elbow variables in the emulator, we
+  just use values for where the elbow is most likely to be when the user is standing in
+  the middle of the screen
+*/
+  leftElbow: {
+    x:200,
+    y:300,
+    z:0
+  },
+
+  rightElbow: {
+    x:440,
+    y:300,
+    z:0
+  },
 
   face: {
     x:0,
@@ -81,6 +97,14 @@ function setPhase(newPhase) {
   $('#phase-'+newPhase).addClass('active');
   setGesture();
   sendData();
+}
+
+function swipeRight(){
+  IA.swipeGesture('SwipeToRight');
+}
+
+function swipeLeft(){
+  IA.swipeGesture('SwipeToLeft');
 }
 
 function setGesture() {
@@ -179,7 +203,7 @@ $(function () {
 
   // Hacked delay to let the child frame finish loading
    $('#iframe').load(function(){
-    console.log('Loaded the iframe');
+    console.log('laod the iframe');
     getIA();
     var phase = Storage.get('phase') || 1;
     setPhase(phase);
@@ -199,10 +223,7 @@ $(function () {
          }
          x.appendTo('#screens');
       }
-      //The value in storage might be for a different app or screen no longer there.
-      if(currentScreen && IA.Screens[currentScreen]){
-        IA.setScreen(IA.Screens[currentScreen]);
-      }
+      IA.setScreen(IA.Screens[currentScreen]);
     }, 400);
   });
 

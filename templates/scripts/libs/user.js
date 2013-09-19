@@ -5,11 +5,14 @@ User = {
 
   head: {x: null, y: null, screen: {}},
   hands: {left: {x: null, y: null, screen: {}}, right: {x: null, y: null, screen: {}}},
+  elbows: {left: {x: null, y: null, screen: {}}, right: {x: null, y: null, screen: {}}},
 
-  updateObj: function(obj, newX, newY, newZ) {
+  updateObj: function(obj, newX, newY, newZ, newxmm, newymm) {
     obj.rawX = parseFloat(newX);
     obj.rawY = parseFloat(newY);
     obj.rawZ = parseFloat(newZ);
+    obj.rawxmm = parseFloat(newxmm);
+    obj.rawymm = parseFloat(newymm);
 
 
     //Converts the kinect values into something that maps to the screen
@@ -19,5 +22,7 @@ User = {
     obj.x = converedX;
     obj.y = converedY;
     obj.z = obj.rawZ;
+    obj.xmm = obj.rawxmm;
+    obj.ymm = obj.rawymm;
   },
 };
