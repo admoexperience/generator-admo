@@ -1,9 +1,9 @@
 {
   "name": "<%= _.slugify(appName) %>",
   "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {
-    "generator-admo": "git+ssh://git@bitbucket.org/fireid/admo-generator.git#master"
+  "private": true,
+  "dependencies": {
+    "generator-admo": "git+ssh://git@bitbucket.org:fireid/admo-generator.git#master"
   },
   "engines": {
     "node": ">=0.8.0"
