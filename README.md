@@ -15,7 +15,7 @@ Install [nvm](https://github.com/creationix/nvm) the Node Version Manager which 
 ####Install `Yeoman`:
 
     npm install -g yo grunt-cli bower
-    npm install -g git@bitbucket.org:fireid/admo-generator.git 
+    npm install -g "git+ssh://git@bitbucket.org:fireid/admo-generator.git#master"
 
 ####Install `Compass`:
 
