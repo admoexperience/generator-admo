@@ -2,6 +2,7 @@
 var util = require('util');
 var yeoman = require('yeoman-generator');
 var fs = require('fs');
+var _ = require('yeoman-generator/lib/actions/string')._;
 module.exports = Generator;
 
 function Generator(args, options) {
@@ -34,7 +35,16 @@ Generator.prototype.askFor = function askFor() {
 Generator.prototype.createFiles = function createFiles() {
   var packageJson = fs.readFileSync( "package.json" );
   var app = JSON.parse(packageJson).name;
-  this.mkdir('app/'+app+'/components/'+this.component);
-  this.write('app/'+app+'/components/'+this.component+'/'+this.component+'.js', '//Fill this with your own file');
-  this.write('app/'+app+'/components/'+this.component+'/'+this.component+'.scss', '//Fill this with your own file');
+  var slug = _.dasherize(this.component);
+  console.log(this);
+  var folder = 'app/'+app+'/components/'+slug;
+  this.mkdir(folder);
+  var jsFile = folder + '/' + slug +'.js';
+  this.template('_component.js', jsFile);
+  this.template('_component.scss', folder + '/' + slug +'.scss');
+
+  fs.appendFile('app/_include.html', '<script src="'+jsFile+'"></script>\n', function (err) {
+    if (err) throw err;
+    console.log('Appending '+slug+' to _include.html');
+  });
 };

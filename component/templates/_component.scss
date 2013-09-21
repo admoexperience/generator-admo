@@ -1,0 +1,7 @@
+$z-index-<%= _.slugify(component) %>: 200 !default;
+.<%= _.slugify(component) %> {
+  z-index: $z-index-<%= _.slugify(component) %>;
+  .inner-class{
+
+  }
+}
