@@ -36,15 +36,21 @@ Generator.prototype.createFiles = function createFiles() {
   var packageJson = fs.readFileSync( "package.json" );
   var app = JSON.parse(packageJson).name;
   var slug = _.dasherize(this.component);
-  console.log(this);
+
+  var jsFile = app+'/components/'+slug+'/'+slug+'.js';
+  var cssFile = slug+'/'+slug+'.scss';
   var folder = 'app/'+app+'/components/'+slug;
   this.mkdir(folder);
-  var jsFile = folder + '/' + slug +'.js';
-  this.template('_component.js', jsFile);
+  this.template('_component.js', folder + '/' + slug +'.js');
   this.template('_component.scss', folder + '/' + slug +'.scss');
 
-  fs.appendFile('app/_include.html', '<script src="'+jsFile+'"></script>\n', function (err) {
+  fs.appendFile('app/_include.html', '<script src="'+jsFile + '"></script>\n', function (err) {
     if (err) throw err;
     console.log('Appending '+slug+' to _include.html');
+  });
+
+  fs.appendFile('app/'+app+'/styles/main.scss', '@import "'+cssFile+'";\n', function (err) {
+    if (err) throw err;
+    console.log('Appending '+slug+' to main.scss');
   });
 };

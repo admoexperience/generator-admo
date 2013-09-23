@@ -3,4 +3,4 @@
   html: function(){
     return '<div class="inner-class"></div>';
   }
-};
+});

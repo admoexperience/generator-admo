@@ -4,7 +4,7 @@
 
 AdmoApp.MainCtrl = function($scope) {
 
-    var staticHtml = StaticHtml.createHtml('<div style="width: 500px; height: 500px; top: 10px;left: 10px;background-color: #FF0000;z-index: 500;">Replace me</div>');
+    var staticHtml = StaticHtml.createHtml('<div>Replace me</div>');
 
     AdmoApp.Screens.demoScreen = Screen.create({
       components:[staticHtml],
