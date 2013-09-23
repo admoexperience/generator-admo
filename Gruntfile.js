@@ -9,11 +9,11 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {
-          jQuery: true,
-          require: true,
-          console: true,
-          module: true,
-          __dirname: true
+          jQuery: false,
+          require: false,
+          console: false,
+          module: false,
+          __dirname: false
         }
       }
     }
