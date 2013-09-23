@@ -46,15 +46,7 @@ h1,h2,h3,h4,h5,h6,strong {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: -10;
   -webkit-transform: scaleX(-1);
-  /*
-  -webkit-filter: contrast(1.1) saturate(2) sepia(50%);
-
-  -webkit-filter: contrast(1.2) brightness(1.2);
-  */
-}
-
-#video {
   background-color: #999999;
 }
