@@ -45,12 +45,16 @@ Generator.prototype.createFiles = function createFiles() {
   this.template('_component.scss', folder + '/' + slug +'.scss');
 
   fs.appendFile('app/_include.html', '<script src="'+jsFile + '"></script>\n', function (err) {
-    if (err) throw err;
+    if (err){
+      throw err;
+    }
     console.log('Appending '+slug+' to _include.html');
   });
 
   fs.appendFile('app/'+app+'/styles/main.scss', '@import "'+cssFile+'";\n', function (err) {
-    if (err) throw err;
+    if (err){
+      throw err;
+    }
     console.log('Appending '+slug+' to main.scss');
   });
 };

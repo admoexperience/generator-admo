@@ -19,7 +19,7 @@ module.exports = {
     files: ['**/_include.html'],
     tasks: ['copy:admoIndexFramework','copy:index', 'preprocess:admoIndexLive'],
     options: {
-      livereload: true,
-    },
+      livereload: true
+    }
   }
-}
+};

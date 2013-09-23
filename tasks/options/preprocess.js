@@ -15,4 +15,4 @@ module.exports = {
     src : '<%= yeoman.dist %>/index.html',
     dest: '<%= yeoman.dist %>/index.html'
   }
-}
+};

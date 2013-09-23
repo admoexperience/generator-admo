@@ -4,4 +4,4 @@ module.exports = {
   options: {
     dirs: ['<%= yeoman.dist %>']
   }
-}
+};
