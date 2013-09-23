@@ -223,7 +223,9 @@ $(function () {
          }
          x.appendTo('#screens');
       }
-      IA.setScreen(IA.Screens[currentScreen]);
+      if(currentScreen && IA.Screens[currentScreen]){
+        IA.setScreen(IA.Screens[currentScreen]);
+      }
     }, 400);
   });
 
