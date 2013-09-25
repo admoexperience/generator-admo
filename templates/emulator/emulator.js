@@ -2,20 +2,20 @@
   handState: "released",
   phase:0,
   head:{
-    x:0,
-    y:0,
+    x:300,
+    y:135,
     z:1400
   },
 
   leftHand:{
-    x:0,
-    y:0,
+    x:250,
+    y:300,
     z:1400
   },
 
   rightHand: {
-    x:0,
-    y:0,
+    x:350,
+    y:300,
     z:1400
   },
 /*
@@ -108,15 +108,17 @@ function swipeLeft(){
 }
 
 function setGesture() {
-  if (mouse == 'head') {
-    KinectState.head.x = mouseX;
-    KinectState.head.y = mouseY;
-  } else if (mouse == 'left') {
-    KinectState.leftHand.x = mouseX;
-    KinectState.leftHand.y = mouseY;
-  } else if (mouse == 'right') {
-    KinectState.rightHand.x = mouseX;
-    KinectState.rightHand.y = mouseY;
+  if (mouseX && mouseY) {
+    if (mouse == 'head') {
+      KinectState.head.x = mouseX;
+      KinectState.head.y = mouseY;
+    } else if (mouse == 'left') {
+      KinectState.leftHand.x = mouseX;
+      KinectState.leftHand.y = mouseY;
+    } else if (mouse == 'right') {
+      KinectState.rightHand.x = mouseX;
+      KinectState.rightHand.y = mouseY;
+    }
   }
   $('#kinect-data').html('<pre>'+JSON.stringify(KinectState,null,4)+'</pre>');
 }
