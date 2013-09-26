@@ -115,16 +115,8 @@ window.AdmoApp = BaseObject.create({
     this.switchingScreens = false;
   },
   reload: function(data){
-    //wraps the browser reload, so it only happens when some one is not using it
-    //Waits another second before trying to reload the app again.
-    this.addTimeout("reloadbrowser",function(){
-      if(AdmoApp.currentState != 3){
-        window.location.reload(true);
-      }else {
-        AdmoApp.removeTimeout("reloadbrowser");
-        AdmoApp.reload();
-      }
-    },1000);
+    //Force reload the browser even if there is some one in view.
+    window.location.reload(true);
   },
 
   setState: function(newState) {
