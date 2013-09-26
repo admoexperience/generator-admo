@@ -18,8 +18,8 @@ module.exports = {
     options: {
       specify: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/main.scss',
       sassDir: '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/styles/',
-      importPath: ['.tmp/styles', '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/components', ],
-      cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/',
+      importPath: ['.tmp/styles', '<%= yeoman.app %>/<%= grunt.config("currentApp") %>/components' ],
+      cssDir: '.tmp/<%= grunt.config("currentApp") %>/styles/'
     }
   }
-}
+};

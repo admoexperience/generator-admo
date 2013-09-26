@@ -26,7 +26,7 @@ AdmoGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     type: 'string',
     name: 'appName',
-    message: 'What would you like to call this app?',
+    message: 'What would you like to call this app?'
   }];
 
   this.prompt(prompts, function (props) {

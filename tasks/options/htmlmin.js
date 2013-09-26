@@ -8,4 +8,4 @@ module.exports = {
       dest: '<%= yeoman.dist %>'
     }]
   }
-}
+};

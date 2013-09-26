@@ -5,9 +5,10 @@
  * Copyright (c) 2013 David Rubin
  */
 
-'use strict';
+
 
 module.exports = function(grunt) {
+  'use strict';
 
   var path = require('path');
 
@@ -21,14 +22,14 @@ module.exports = function(grunt) {
       object[key] = require(path.join(folderPath, option));
     });
     return object;
-  };
+  }
 
   function getAppName(){
     var fs = require('fs');
     var packageJson = fs.readFileSync( "package.json" );
     var app = JSON.parse(packageJson).name;
     return app;
-  };
+  }
 
   // load all grunt tasks
   var plugins = [

@@ -5,9 +5,9 @@ module.exports = {
     GIT_COMMIT: '<%= grunt.config("GIT_COMMIT") || "not set" %>',
     CURRENT_APP: '<%= grunt.config("currentApp") %>',
     ENVIRONMENT: '<%= grunt.config("currentEnvironment") || "development" %>',
-    POD_COMPILE_DATE: new Date(),
+    POD_COMPILE_DATE: new Date()
   },
   setEnv: {
 
   }
-}
+};
