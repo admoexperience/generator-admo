@@ -16,6 +16,13 @@ module.exports = {
     ],
     tasks: ['livereload']
   },
+  templates:{
+    files: ['**/*.tpl'],
+    tasks: ['jst:server'],
+    options: {
+      livereload: true
+    }
+  },
   admoIndex: {
     files: ['**/_include.html'],
     tasks: ['copy:watchAdmoFramework', 'preprocess:admoIndexLive'],

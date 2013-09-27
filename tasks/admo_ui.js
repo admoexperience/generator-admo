@@ -49,7 +49,8 @@ module.exports = function(grunt) {
     "grunt-contrib-htmlmin",
     "grunt-contrib-concat",
     "grunt-contrib-uglify",
-    "grunt-contrib-compress"
+    "grunt-contrib-compress",
+    "grunt-contrib-jst"
   ];
   plugins.forEach(grunt.loadNpmTasks);
 
@@ -64,6 +65,7 @@ module.exports = function(grunt) {
     'clean',
     //Manually copy over the config and preprocess it
     'copy:admoFramework',
+    'jst:server',
     'compass:serverMain',
     'compass:serverApp',
     'preprocess:admoConfigLive',
@@ -80,6 +82,7 @@ module.exports = function(grunt) {
     'clean',
     'useminPrepare',
     'copy:dist',
+    'jst:dist',
     'compass:distFramework',
     'compass:distApp',
     'preprocess:admoConfigDist',

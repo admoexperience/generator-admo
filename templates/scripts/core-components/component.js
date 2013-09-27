@@ -125,9 +125,12 @@ Component = BaseObject.create({
 
   },
 
+  template: function(name){
+    return JST[name]();
+  },
   html: function(){
     //Function *must* make sure the html returned here is safe
-    return "";
+    return template(this.css) || "";
   },
   _renderHtml: function(){
     //Make it an array
