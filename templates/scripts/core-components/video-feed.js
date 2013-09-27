@@ -3,21 +3,26 @@
 //*****************************************************************
 
 VideoFeed = Component.create({
+  //Raw document video feed element
+  videoRaw: null,
+  //Jquery element of the video sub element
+  video: null,
   html: function(){
-    return '<video id="video"></video>';
+    return '<video></video>';
   },
   shown:function(){
-    this.video = document.getElementById("video");
+    this.videoRaw = this.subElm('video').get()[0];
+    this.video = this.subElm('video');
     var videoObj = { "video": { "mandatory": { "minWidth": "1280", "minHeight": "720" } }};
 
     var errBack = function(error) {
         console.log("Video capture error: ", error.code);
     };
-
+    var self = this;
     // Put video listeners into place. Assume webkit-prefixed
     navigator.webkitGetUserMedia(videoObj, function(stream){
-      this.video.src = window.webkitURL.createObjectURL(stream);
-      this.video.play();
+      self.videoRaw.src = window.webkitURL.createObjectURL(stream);
+      self.videoRaw.play();
     }, errBack);
   }
 });
