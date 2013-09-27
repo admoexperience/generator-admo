@@ -1,7 +1,7 @@
 module.exports = {
   compass: {
     files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
-    tasks: ['compass']
+    tasks: ['compass:serverMain']
   },
   livereload: {
     files: [
@@ -17,7 +17,7 @@ module.exports = {
   },
   admoIndex: {
     files: ['**/_include.html'],
-    tasks: ['copy:admoIndexFramework','copy:index', 'preprocess:admoIndexLive'],
+    tasks: ['copy:watchAdmoFramework', 'preprocess:admoIndexLive'],
     options: {
       livereload: true
     }
