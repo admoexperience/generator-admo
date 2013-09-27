@@ -1,5 +1,4 @@
 var path = require('path');
-console.log(path.join(__dirname, '../../templates'));
 module.exports = {
   //Copy the core framework from the NPM module into the .tmp dir for serving.
   admoFramework: {

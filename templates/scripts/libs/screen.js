@@ -19,6 +19,12 @@ Screen = BaseObject.create({
   },
   show: function() {
   },
+  _init:function(){
+    for(var i in this.components){
+      this.components[i].init();
+      this.components[i]._setId();
+    }
+  },
   _shown: function(){
     this.shown();
     for(var i in this.components){
@@ -40,6 +46,12 @@ Screen = BaseObject.create({
   },
   hidden: function(){
 
+  },
+  _update: function(){
+    for (var i in this.components) {
+      if (this.components[i]._update)
+        this.components[i]._update();
+    }
   },
 
   getCss: function(){

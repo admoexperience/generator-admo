@@ -14,8 +14,13 @@
 
   </head>
   <body class="background">
-    <video id="video"></video>
-    <canvas id="canvas"></canvas>
-    <div id="screen-container" ng-view></div>
+    <div id="global-components">
+
+    </div>
+      <div id="screen">
+    </div>
+
+    <!-- Empty div to make angular happy untill we remove it completely-->
+    <div id="isnt-used" ng-view></div>
   </body>
 </html>
