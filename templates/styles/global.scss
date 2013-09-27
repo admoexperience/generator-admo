@@ -32,12 +32,16 @@ h1,h2,h3,h4,h5,h6,strong {
   -webkit-transition: ease 500ms;
 }
 
-#video {
-  @include screen-size;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -10;
-  -webkit-transform: scaleX(-1);
-  background-color: #999999;
+
+//Global components
+.video-feed{
+  video {
+    @include screen-size;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    -webkit-transform: scaleX(-1);
+    background-color: #999999;
+  }
 }
