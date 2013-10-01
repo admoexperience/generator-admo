@@ -9,7 +9,7 @@ VideoFeed = Component.create({
   video: null,
   minWidth: "1280",
   minHeight: "720",
-  css: 'video-feed',
+  name: 'video-feed',
   html: function() {
     return '<video></video>';
   },

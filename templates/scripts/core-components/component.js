@@ -15,6 +15,7 @@ Component = BaseObject.create({
   logCounter:1,
   //Components can define the default cssClasses
   css:[],
+  name:null,
   //An additional css class that instances can use
   extraCss:[],
   element: null,
@@ -125,16 +126,29 @@ Component = BaseObject.create({
 
   },
 
-  template: function(name){
-    return JST[name]();
+  template: function(){
+    if(!this.name){
+      throw '[name] is a required field if you want to use the template function';
+    }
+    if(!this.name in JST){
+      throw "Template not found ["+this.name+"]";
+    }
+    return JST[this.name](this);
   },
   html: function(){
     //Function *must* make sure the html returned here is safe
-    return template(this.css) || "";
+    return this.template();
   },
   _renderHtml: function(){
+    if (this.css instanceof Array){
+      console.warn("Use of an array for this.css ["+this.css.join(',')+"] has been depricated please replace with this.name");
+    }
+    if(this.css){
+      console.warn("Use of this.css["+this.css+"] has been depricated please use, [this.name]");
+    }
+
     //Make it an array
-    var tmpCss =[].concat(this.css);
+    var tmpCss =[].concat(this.name || this.css);
     var tmpExtra = [].concat(this.extraCss);
     var newCss = tmpCss.concat(tmpExtra).join(' ');
 
