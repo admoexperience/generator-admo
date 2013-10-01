@@ -4,6 +4,15 @@
 
 AdmoApp.MainCtrl = function($scope) {
 
+    //Global components that are shared across screens.
+    //Careful care should be made to ONLY use these as needed
+    //Generally this should only be used for consistent background elements
+    var videoFeed = VideoFeed.create();
+
+    var globalComponents = GlobalComponents.create({
+      components:[videoFeed]
+    });
+
     var staticHtml = StaticHtml.createHtml('<div>Replace me</div>');
 
     AdmoApp.Screens.demoScreen = Screen.create({
@@ -27,7 +36,7 @@ AdmoApp.MainCtrl = function($scope) {
     };
 
     /**********STATE SCREEN HANDLER***************/
-
+    AdmoApp.setGlobalComponents(globalComponents);
 
     AdmoApp.init();
 

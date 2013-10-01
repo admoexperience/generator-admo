@@ -8,7 +8,7 @@ module.exports = {
     dest: '.tmp/index.html'
   },
   admoConfigDist : {
-    src : '.tmp/scripts/libs/admo-config.js',
+    src : '<%= yeoman.dist %>/scripts/libs/admo-config.js',
     dest: '<%= yeoman.dist %>/scripts/libs/admo-config.js'
   },
   admoIndexDist : {

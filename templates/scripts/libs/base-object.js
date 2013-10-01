@@ -19,7 +19,8 @@ BaseObject = __createObject({
   //Uses for extending an object. Syntax is
   //var prop = BaseObject.create({prop1,: 1, prop2: 2});
   create:function(properties){
-     return $$(this,properties);
+     var x = properties || {};
+     return $$(this,x);
   },
   //Generates a unique (bare threading issues) id that can be used on the dom for id="";
   generateId: function(){
