@@ -2,7 +2,7 @@ var path = require('path');
 module.exports = {
   compass: {
     files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
-    tasks: ['compass:serverMain']
+    tasks: ['compass:serverMain','compass:serverApp']
   },
   livereload: {
     files: [
