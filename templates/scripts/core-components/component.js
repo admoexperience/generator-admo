@@ -14,7 +14,7 @@ Component = BaseObject.create({
   proceeding: false,
   logCounter:1,
   //Components can define the default cssClasses
-  css:[],
+  css:'',
   name:null,
   //An additional css class that instances can use
   extraCss:[],
@@ -22,6 +22,8 @@ Component = BaseObject.create({
 
   scale: 1,
   scaleOffset: {x:0,y:0},
+  _subComponents: null,
+  requiredFields: null,
 
   show: function() {
     this.isShown = true;
@@ -29,8 +31,11 @@ Component = BaseObject.create({
     return this;
   },
   _shown: function(){
-      this.element = $('#' + this.id);
+      this._setElement();
       this.shown();
+      for(var i=0; i< this._subComponents.length; i++){
+        this._subComponents[i]._shown();
+      }
   },
   shown: function() {
   },
@@ -40,10 +45,16 @@ Component = BaseObject.create({
     this.hidden();
     return this;
   },
+  _setElement:function(){
+    this.element = $('#' + this.id);
+  },
 
   _hidden: function() {
-    this.element = $('#' + this.id);
+    this._setElement();
     this.hidden();
+    for(var i in this._subComponents){
+      this._subComponents[i]._hidden();
+    }
   },
 
   hidden: function(){
@@ -51,16 +62,36 @@ Component = BaseObject.create({
   },
 
   _update: function(){
-    this.element = $('#' + this.id);
+   this._setElement();
+   for(var i in this._subComponents){
+      this._subComponents[i]._update();
+    }
     this.update();
   },
 
   update: function() {
 
   },
+  addComponent: function(component){
+    this._subComponents.push(component);
+    component._init();
+  },
+
+  subElement: function(selector){
+    return $(selector, '#' + this.id);
+  },
 
   subElm:function(selector){
-    return $(selector, '#' + this.id);
+    return this.subElement(selector);
+  },
+
+  domSubElement: function(selector){
+    //Returns a raw document.getElementById thing but by jquery
+    return this.subElm(selector)[0];
+  },
+
+  subElmRaw:function(selector){
+    return this.domSubElement(selector);
   },
 
   _setId:function(){
@@ -72,10 +103,15 @@ Component = BaseObject.create({
     this.proceeding=false;
   },
 
-  init: function() {
+  _init: function() {
+    this._subComponents = [];
     this._setId();
     this._reset();
-    this.element = $('#' + this.id);
+    this.init();
+  },
+
+  init: function(){
+
   },
 
   //Method calles the procced method but ONLY once.
@@ -126,18 +162,19 @@ Component = BaseObject.create({
 
   },
 
-  template: function(){
-    if(!this.name){
+  template: function(tplName){
+    if(!tplName){
+      console.error("Name is required");
+      console.error(this.css);
       throw '[name] is a required field if you want to use the template function';
     }
-    if(!this.name in JST){
-      throw "Template not found ["+this.name+"]";
+    if(!tplName in JST){
+      throw "Template not found ["+tplName+"]";
     }
-    return JST[this.name](this);
+    return JST[tplName](this);
   },
   html: function(){
-    //Function *must* make sure the html returned here is safe
-    return this.template();
+    return this.template(this.name);
   },
   _renderHtml: function(){
     if (this.css instanceof Array){
@@ -151,9 +188,13 @@ Component = BaseObject.create({
     var tmpCss =[].concat(this.name || this.css);
     var tmpExtra = [].concat(this.extraCss);
     var newCss = tmpCss.concat(tmpExtra).join(' ');
-
+    //Function *must* make sure the html returned here is safe
+    var subhtml = _.map(this._subComponents,function(comp){
+      return comp._renderHtml();
+    });
     return '<div id="'+this.id+'" class="'+ newCss + '">' +
       this.html() +
+      subhtml+
     '</div>';
   },
 

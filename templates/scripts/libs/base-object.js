@@ -15,12 +15,20 @@ function __createObject(obj){
 BaseObject = __createObject({
   timeouts: {},
   _autoId: 0,
+  _initialized:false,
 
   //Uses for extending an object. Syntax is
   //var prop = BaseObject.create({prop1,: 1, prop2: 2});
   create:function(properties){
-     var x = properties || {};
-     return $$(this,x);
+    var x = properties || {};
+    var self = $$(this,x);
+    return self;
+  },
+  _init: function(){
+    this.init();
+  },
+  init:function(){
+    //do nothing by default.
   },
   //Generates a unique (bare threading issues) id that can be used on the dom for id="";
   generateId: function(){
