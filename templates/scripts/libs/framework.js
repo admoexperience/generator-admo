@@ -16,8 +16,6 @@ window.AdmoApp = BaseObject.create({
   switchingScreens: false,
 
   setScreen: function(newScreen) {
-
-    console.log('setScreen: ' + newScreen);
     // Ignore if there is no change, or if a transition is in progress
     if (this.switchingScreens || (newScreen == this.currentScreen))
       return;
@@ -32,7 +30,6 @@ window.AdmoApp = BaseObject.create({
     }
 
     this.currentScreen = newScreen;
-    console.log("__init screen");
     this.currentScreen._init();
     window.setTimeout(this.showScreen, delay);
   },
@@ -47,10 +44,8 @@ window.AdmoApp = BaseObject.create({
 
   showScreen: function() {
     if(!this.currentScreen) return;
-    $('#screen').css(this.currentScreen.getCss())
-    console.log("before __gethml screen");
+    $('#screen').css(this.currentScreen.getCss());
     $('#screen').html(this.currentScreen._getHtml());
-    console.log("after screen");
     this.currentScreen._shown();
     this.switchingScreens = false;
   },
