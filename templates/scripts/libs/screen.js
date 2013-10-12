@@ -27,18 +27,14 @@ Screen = BaseObject.create({
 
   },
   init:function(){
-    console.log("screen  init");
     for(var i = 0; i < this.components.length; i++){
-      console.log("screen  before init");
       this.components[i]._init();
-      console.log("screen  after init");
     }
   },
 
   shown: function() {
   },
   _hidden: function() {
-    console.log('Screen hidden away');
     this.hidden();
     for(var i = 0; i < this.components.length; i++){
       //The components aren't on the screen remove them.

@@ -52,7 +52,7 @@ Component = BaseObject.create({
   _hidden: function() {
     this._setElement();
     this.hidden();
-    for(var i in this._subComponents){
+    for(var i=0; i< this._subComponents.length; i++){
       this._subComponents[i]._hidden();
     }
   },
