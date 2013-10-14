@@ -27,7 +27,7 @@ html, body {
 #kinect-data{
   position: absolute;
   left: 10px;
-  top: 700px;
+  top: 10px;
 }
 
 #controls {

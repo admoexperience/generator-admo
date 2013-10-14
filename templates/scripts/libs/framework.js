@@ -16,8 +16,6 @@ window.AdmoApp = BaseObject.create({
   switchingScreens: false,
 
   setScreen: function(newScreen) {
-
-    console.log('setScreen: ' + newScreen);
     // Ignore if there is no change, or if a transition is in progress
     if (this.switchingScreens || (newScreen == this.currentScreen))
       return;
@@ -32,10 +30,7 @@ window.AdmoApp = BaseObject.create({
     }
 
     this.currentScreen = newScreen;
-    var comps = this.currentScreen.components;
-    for(var i in comps){
-        comps[i].init();
-    }
+    this.currentScreen._init();
     window.setTimeout(this.showScreen, delay);
   },
 
@@ -49,9 +44,8 @@ window.AdmoApp = BaseObject.create({
 
   showScreen: function() {
     if(!this.currentScreen) return;
-
-    this.currentScreen._init();
-    $('#screen').css(this.currentScreen.getCss())
+    //Can't use addclass or set class because it changes over time.
+    $('#screen').attr("class",this.currentScreen.getCss());
     $('#screen').html(this.currentScreen._getHtml());
     this.currentScreen._shown();
     this.switchingScreens = false;

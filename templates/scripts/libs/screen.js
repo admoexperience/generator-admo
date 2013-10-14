@@ -19,25 +19,24 @@ Screen = BaseObject.create({
   },
   show: function() {
   },
-  _init:function(){
-    for(var i in this.components){
-      this.components[i].init();
-      this.components[i]._setId();
-    }
-  },
   _shown: function(){
     this.shown();
-    for(var i in this.components){
+    for(var i = 0; i < this.components.length; i++){
       this.components[i]._shown();
     }
 
   },
+  init:function(){
+    for(var i = 0; i < this.components.length; i++){
+      this.components[i]._init();
+    }
+  },
+
   shown: function() {
   },
   _hidden: function() {
-    console.log('Screen hidden away');
     this.hidden();
-    for(var i in this.components){
+    for(var i = 0; i < this.components.length; i++){
       //The components aren't on the screen remove them.
       //TODO: Handle time outs you want to carry over screen transitions
       this.components[i]._removeAllTimeouts();
@@ -48,7 +47,7 @@ Screen = BaseObject.create({
 
   },
   _update: function(){
-    for (var i in this.components) {
+    for(var i = 0; i < this.components.length; i++){
       if (this.components[i]._update)
         this.components[i]._update();
     }
