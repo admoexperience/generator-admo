@@ -44,7 +44,7 @@ window.AdmoApp = BaseObject.create({
 
   showScreen: function() {
     if(!this.currentScreen) return;
-    $('#screen').css(this.currentScreen.getCss());
+    $('#screen').addClass(this.currentScreen.getCss());
     $('#screen').html(this.currentScreen._getHtml());
     this.currentScreen._shown();
     this.switchingScreens = false;
