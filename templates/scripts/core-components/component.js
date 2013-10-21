@@ -191,11 +191,13 @@ Component = BaseObject.create({
     //Function *must* make sure the html returned here is safe
     var subhtml = _.map(this._subComponents,function(comp){
       return comp._renderHtml();
-    });
-    return '<div id="'+this.id+'" class="'+ newCss + '">' +
+    }).join('\n');
+
+    var htmlLocal= '<div id="'+this.id+'" class="'+ newCss + '">' +
       this.html() +
       subhtml+
     '</div>';
+    return htmlLocal;
   },
 
   log:function(message){

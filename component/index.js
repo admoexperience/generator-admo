@@ -43,7 +43,7 @@ Generator.prototype.createFiles = function createFiles() {
   this.mkdir(folder);
   this.template('_component.js', folder + '/' + slug +'.js');
   this.template('_component.scss', folder + '/' + slug +'.scss');
-  this.template('_component.scss', folder + '/' + slug +'.tpl');
+  this.template('_component.tpl', folder + '/' + slug +'.tpl');
 
   fs.appendFile('app/_include.html', '<script src="'+jsFile + '"></script>\n', function (err) {
     if (err){
