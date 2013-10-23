@@ -14,7 +14,7 @@ Stats = BaseObject.create({
     //We can only init once :/
     //TODO: fix this.
     if(this.inited) return;
-    this.logStats = AdmoConfig.isProd() && apiKey;
+    this.logStats = true;//AdmoConfig.isProd() && apiKey;
     this.setApp(appName);
     //Events get assigned to random people if not tied to a user
     this.identify(UUID.create());

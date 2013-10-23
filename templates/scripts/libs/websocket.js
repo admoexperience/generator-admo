@@ -1,6 +1,6 @@
 var serverOverride = null;
 // Set up the Alchemy client object
-//var serverOverride = "10.20.0.161"; // David vm
+var serverOverride = "10.20.0.148"; // David vm
 //var serverOverride = "10.10.10.64"; // Admo-room
 //Set this value to make the framework connect to another IP address
 
@@ -19,14 +19,14 @@ AdmoApp.WebSocket.Connected = function(){
     var alive = {type:'alive'};
     setInterval(function(){
       console.log("Sending alive ping");
-      AlchemyServer.Send(alive);
+      AdmoApp.WebSocket.Send(alive);
     },4000);
 
     //The server isn't actually connected here. So we fake waiting a while.
     //This needs to be fixed some how.
     //TODO: Fix this is a hack
     setTimeout(function(){
-      AlchemyServer.Send({type:'config'})
+      AdmoApp.WebSocket.Send({type:'config'})
     },500);
 
 };
