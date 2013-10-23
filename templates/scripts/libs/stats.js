@@ -4,54 +4,64 @@
 Stats = BaseObject.create({
 
   startTime:null,
-  hostName:null,
   logStats: false,
   inited:false,
+  _properties:{
 
-  init: function(appName, apiKey){
+  },
+
+  init: function(appName){
     //We can only init once :/
-
     //TODO: fix this.
     if(this.inited) return;
     this.logStats = AdmoConfig.isProd() && apiKey;
-    window.mixpanel.init(apiKey);
-    window.mixpanel.set_config({
-      debug: true,
-      test: true,
-      verbose: 1,
-      //we don't have page views in our app
-      track_pageview:false,
-    });
     this.setApp(appName);
     //Events get assigned to random people if not tied to a user
-    window.mixpanel.identify(UUID.create());
+    this.identify(UUID.create());
     this.inited = true;
   },
+  identify: function(uuid){
+    this._properties['distinct_id'] = uuid;
+  },
 
-  getUUID: function(){
-    return window.mixpanel.get_distinct_id();
+  getIdentity: function(){
+    return this._properties['distinct_id'];
   },
 
   setApp: function(appName){
-    window.mixpanel.register({appName:appName});
+    this._properties['appName'] = appName;
   },
 
-  setHost: function(hostName){
-    this.hostName=hostName;
-    window.mixpanel.register({hostName:hostName});
+  setHost: function(unitName){
+    this.setUnitName(unitName)
+
   },
+  setUnitName: function(unitName){
+    this._properties['unitName'] = unitName;
+  },
+
   track: function(event, properties){
+
+    var props = AdmoApp.Utils.mergeObjects(this._properties,properties || {});
+    //Time needs to be when the event was logged
+    props.time = AdmoApp.Utils.unixEpochTime();
+
+    var loggingEvent = {type: 'trackAnalytics', data: {
+          name: event,
+          properties: props
+      }
+    };
     if(this.logStats){
-      window.mixpanel.track(event,properties);
+      AdmoApp.WebSocket.Send(loggingEvent);
+      //TODO: Track events via websocks
+      console.log("Stats.record.real: ",event,props);
     }else {
-      console.log("Would be logging "+event);
-      console.log(properties);
+      console.log("Stats.record: ",event,props);
     }
   },
 
   startSession: function(){
     this.startTime = new Date();
-    //Stats.track('startSession');
   },
 
   endSession:function(){
@@ -65,8 +75,8 @@ Stats = BaseObject.create({
     }
     this.startTime= null;
     var uuid = UUID.create();
-    console.log("Changing user from "+ window.mixpanel.get_distinct_id()+" to "+ uuid);
+    console.log("Changing user from "+ this.getIdentity()+" to "+ uuid);
     //Reset it back to random
-    window.mixpanel.identify(UUID.create());
+    this.identify(uuid);
   }
 });
