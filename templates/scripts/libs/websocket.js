@@ -1,6 +1,6 @@
 var serverOverride = null;
 // Set up the Alchemy client object
-var serverOverride = "10.20.0.148"; // David vm
+//var serverOverride = "10.20.0.148"; // David vm
 //var serverOverride = "10.10.10.64"; // Admo-room
 //Set this value to make the framework connect to another IP address
 
