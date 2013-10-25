@@ -74,7 +74,8 @@ window.AdmoApp = BaseObject.create({
     //Can't include the hostname at appstart up since we wont know it then.
     Bugsnag.metaData.unit.hostname = AdmoConfig.cmsConfig.hostname;
     console.log("Updating config to",AdmoConfig.cmsConfig);
-    this.initStats();
+    //TODO: Legacy value should come from the unitName
+    Stats.setUnitName(AdmoConfig.cmsConfig.hostname);
   },
 
   /*
@@ -148,7 +149,7 @@ window.AdmoApp = BaseObject.create({
   initWebsockets: function() {
     //Only start it once
     console.log("Starting web socket client");
-    AlchemyServer.Start();
+    AdmoApp.WebSocket.Start();
   },
   initBugsnag: function(){
     Bugsnag.apiKey = AdmoConfig.bugsnagApi;
@@ -184,10 +185,7 @@ window.AdmoApp = BaseObject.create({
   },
 
   initStats: function(){
-    //Use legacy grunt build var
-    var key = AdmoConfig.cmsConfig.mixpanel_api_key;
-    Stats.init(AdmoConfig.currentApp, key);
-    Stats.setHost(AdmoConfig.cmsConfig.hostname);
+    Stats.init(AdmoConfig.currentApp);
   },
 
   //Adds a script to the dom for use.
@@ -218,6 +216,7 @@ window.AdmoApp = BaseObject.create({
     this.initBugsnag();
     this.initDebug();
     this.initWebsockets();
+    this.initStats();
     this.setState(this.currentState);
     this.initAnimationLoop();
   }

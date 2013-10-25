@@ -5,7 +5,7 @@ var serverOverride = null;
 //Set this value to make the framework connect to another IP address
 
 
-AlchemyServer = new Alchemy({
+AdmoApp.WebSocket = new Alchemy({
     Server: serverOverride || "localhost",
     Port:1080,
     SocketType: Alchemy.prototype.SocketTypes.WebSocket,
@@ -13,14 +13,13 @@ AlchemyServer = new Alchemy({
     DebugMode: false
 });
 
-AlchemyServer.Connected = function(){
+AdmoApp.WebSocket.Connected = function(){
     console.log("connected");
     //Send a keep alive to the C# server every 4 seconds
     var alive = {type:'alive'};
     setInterval(function(){
       console.log("Sending alive ping");
       AlchemyServer.Send(alive);
-
     },4000);
 
     //The server isn't actually connected here. So we fake waiting a while.
@@ -31,11 +30,11 @@ AlchemyServer.Connected = function(){
     },500);
 
 };
-AlchemyServer.Disconnected = function(){
+AdmoApp.WebSocket.Disconnected = function(){
     console.log("disconnected");
 };
 
-AlchemyServer.MessageReceived = function(event){
+AdmoApp.WebSocket.MessageReceived = function(event){
   //console.log(event);
    try{
         var eventData = JSON.parse(event.data);
