@@ -45,6 +45,9 @@ AdmoApp.WebSocket.MessageReceived = function(event){
           case 'swipeGesture':
             AdmoApp.handleSwipe(eventData.data);
             break;
+          case 'userImage':
+            AdmoApp.handleImageFrame(eventData.data);
+            break;
           case 'config':
             AdmoApp.handleConfig(eventData.data);
             break;
