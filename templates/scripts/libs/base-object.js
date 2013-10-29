@@ -51,10 +51,7 @@ BaseObject = __createObject({
   removeTimeout: function(name) {
     // Due to prototypal inheritance, timeouts is shared amongs all objects. Make sure timeout names are unique
     name += '_' + this._id;
-    if (this.timeouts[name]) {
-      window.clearTimeout(this.timeouts[name]);
-      this.timeouts[name] = null;
-    }
+    this._removeTimeout(name);
   },
   setInterval: function(name, fn, time) {
     var self = this;
@@ -64,15 +61,20 @@ BaseObject = __createObject({
       var self = this;
       this.timeouts[name] = window.setInterval(function(){
         fn.apply(self);
-        //clear the timeout after it has run
-        self.timeouts[name] = null;
       }, time);
     }
   },
 
   _removeAllTimeouts:function(){
     for(var i in this.timeouts){
-      this.removeTimeout(i);
+      this._removeTimeout(i);
+    }
+  },
+
+  _removeTimeout: function(name){
+    if (this.timeouts[name]) {
+      window.clearTimeout(this.timeouts[name]);
+      this.timeouts[name] = null;
     }
   }
 });
