@@ -1,0 +1,11 @@
+{
+  "name": "app-test",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "generator-admo": "git+ssh://git@bitbucket.org:fireid/admo-generator.git#master"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
