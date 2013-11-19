@@ -13,10 +13,31 @@ AdmoApp.MainCtrl = function($scope) {
       components:[videoFeed]
     });
 
+    var handLeft = HighlightSource.create({
+      extraCss: 'left',
+      source:User.hands.left,
+      active:false,
+      turnOn:true,
+    });
+
+    var handRight = HighlightSource.create({
+      extraCss: 'right',
+      source:User.hands.right,
+      active:false,
+      turnOn:true,
+    });
+
+    var head = HighlightSource.create({
+      extraCss: 'head',
+      source:User.head,
+      active:false,
+      turnOn:true,
+    });
+
     var staticHtml = StaticHtml.createHtml('<div>Replace me</div>');
 
     AdmoApp.Screens.demoScreen = Screen.create({
-      components:[staticHtml],
+      components:[handRight,handLeft,head],
       shown: function(){
         //Stats.track('demoScreen');
       }
