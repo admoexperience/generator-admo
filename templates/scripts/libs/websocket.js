@@ -34,32 +34,16 @@ AdmoApp.WebSocket.Disconnected = function(){
     console.log("disconnected");
 };
 
+
 AdmoApp.WebSocket.MessageReceived = function(event){
   //console.log(event);
    try{
-        var eventData = JSON.parse(event.data);
-        switch(eventData.type){
-          case 'kinectState':
-            AdmoApp.handleGesture(eventData.data);
-            break;
-          case 'swipeGesture':
-            AdmoApp.handleSwipe(eventData.data);
-            break;
-          case 'config':
-            AdmoApp.handleConfig(eventData.data);
-            break;
-          case 'reload':
-            AdmoApp.reload(eventData.data);
-            break;
-          default:
-            console.log("unable to proccess event from server");
-            console.log(eventData);
-            break;
-        }
-
+      var eventData = JSON.parse(event.data);
+      var type = eventData.type;
+      window.AdmoApp.EventHandler.handleEvent(type, eventData.data);
     }catch(exception){
-        console.log("Unable to handle event data");
-        console.log(exception);
-        console.log(event);
+      console.log("Unable to handle event data");
+      console.log(exception);
+      console.log(event);
     }
 };
