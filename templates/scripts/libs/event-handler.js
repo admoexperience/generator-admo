@@ -11,6 +11,9 @@ window.AdmoApp.EventHandler = BaseObject.create({
     },
     reload: function(eventData){
       AdmoApp.reload(eventData);
+    },
+    userImage:function(eventData){
+      AdmoApp.handleImageFrame(eventData);
     }
   },
   handleEvent: function(type,eventData){

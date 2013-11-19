@@ -132,6 +132,14 @@ window.AdmoApp = BaseObject.create({
     //Apps should implement this method is they would like to recieve swipeEvents
   },
 
+  handleImageFrame: function(message) {
+    this.imageFrame(message);
+  },
+
+  imageFrame: function(message){
+
+  },
+
   initAnimationLoop: function() {
     if(this.currentScreen){
         this.currentScreen._update();
