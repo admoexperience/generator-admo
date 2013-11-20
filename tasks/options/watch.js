@@ -17,14 +17,14 @@ module.exports = {
     tasks: ['livereload']
   },
   templates:{
-    files: ['**/*.tpl'],
+    files: ['<%= yeoman.app %>/**/*.tpl'],
     tasks: ['jst:server'],
     options: {
       livereload: true
     }
   },
   admoIndex: {
-    files: ['**/_include.html'],
+    files: ['<%= yeoman.app %>/**/_include.html'],
     tasks: ['copy:watchAdmoFramework', 'preprocess:admoIndexLive'],
     options: {
       livereload: true

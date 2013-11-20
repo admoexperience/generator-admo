@@ -72,25 +72,25 @@ var Storage = {
 
 // Change iframe's target
 
-var IA = null;
+var Admo = null;
 var mouse = "right";
 var mouseX;
 var mouseY;
 
-function getIA() {
-  if (!IA)
-    IA = window.frames[0].IA || window.frames[0].AdmoApp;
+function getAdmo() {
+  if (!Admo)
+    Admo = window.frames[0].AdmoApp;
 }
 
 function setKinect() {
   KinectState.phase = 0;
-  IA.toggleKinect(true);
+  Admo.toggleKinect(true);
 }
 
 function setPhase(newPhase) {
   KinectState.phase = newPhase;
   Storage.set('phase',newPhase);
-  IA.toggleKinect(false);
+  Admo.toggleKinect(false);
   for(var i=0; i < 3; i++){
     $('#phase-'+(i+1)).removeClass('active');
   }
@@ -100,11 +100,11 @@ function setPhase(newPhase) {
 }
 
 function swipeRight(){
-  IA.swipeGesture('SwipeToRight');
+  Admo.swipeGesture('SwipeToRight');
 }
 
 function swipeLeft(){
-  IA.swipeGesture('SwipeToLeft');
+  Admo.swipeGesture('SwipeToLeft');
 }
 
 function setGesture() {
@@ -130,8 +130,9 @@ function setMousePosition(newX, newY) {
 }
 
 function sendData() {
-  if (KinectState.phase  != 0)
-    IA.handleGesture(KinectState, true);
+  if (KinectState.phase  != 0){
+     Admo.EventHandler.handleEvent('kinectState', KinectState);
+  }
 }
 
 function setHead() {
@@ -198,7 +199,7 @@ $(function () {
     var key = $(this).val();
     console.log(key);
     Storage.set('currentScreen',key);
-    IA.setScreen(IA.Screens[key]);
+    Admo.setScreen(Admo.Screens[key]);
   });
 
 
@@ -206,27 +207,26 @@ $(function () {
   // Hacked delay to let the child frame finish loading
    $('#iframe').load(function(){
     console.log('laod the iframe');
-    getIA();
+    getAdmo();
     var phase = Storage.get('phase') || 1;
     setPhase(phase);
     mouse = Storage.get('mouse') || 'right';
     setMouse(mouse);
-    IA.handleGesture(KinectState, true);
 
     window.setInterval(sendData, 30);
     //TODO: Post event rather.
     window.setTimeout(function(){
       var currentScreen =  Storage.get('currentScreen');
-      for(var key in IA.Screens){
-         var screen = IA.Screens[key];
-         var x = $('<option/>').val(key).html(IA.Utils.dashize(key));
+      for(var key in Admo.Screens){
+         var screen = Admo.Screens[key];
+         var x = $('<option/>').val(key).html(Admo.Utils.dashize(key));
          if(currentScreen == key){
             x.attr('selected','selected');
          }
          x.appendTo('#screens');
       }
-      if(currentScreen && IA.Screens[currentScreen]){
-        IA.setScreen(IA.Screens[currentScreen]);
+      if(currentScreen && Admo.Screens[currentScreen]){
+        Admo.setScreen(Admo.Screens[currentScreen]);
       }
     }, 400);
   });

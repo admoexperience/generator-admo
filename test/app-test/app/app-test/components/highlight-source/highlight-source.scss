@@ -1,0 +1,24 @@
+.highlight-source {
+  position: absolute;
+  border-radius: 100%;
+  opacity:1;
+  background-color: #FF0000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 150px;
+  height: 150px;
+  z-index: 100;
+  -webkit-animation: hudRotate 2s linear infinite;
+
+  &.left{
+    background-color: #0000FF;
+  }
+
+  &.right{
+    background-color: #FFFF00;
+  }
+  &.head{
+    background-color: #FF0000;
+  }
+}

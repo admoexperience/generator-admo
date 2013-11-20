@@ -17,13 +17,13 @@ module.exports = {
   server: {
     options: defaultOptions,
     files: {
-      ".tmp/scripts/component-templates.js": ["**/*.tpl"]
+      ".tmp/scripts/component-templates.js": ["<%= yeoman.app %>/**/*.tpl"]
     }
   },
   dist: {
     options: defaultOptions,
     files: {
-      "<%= yeoman.dist %>/scripts/component-templates.js": ["**/*.tpl"]
+      "<%= yeoman.dist %>/scripts/component-templates.js": ["<%= yeoman.app %>/**/*.tpl"]
     }
   }
 }

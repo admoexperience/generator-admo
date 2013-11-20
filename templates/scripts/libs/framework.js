@@ -85,13 +85,13 @@ window.AdmoApp = BaseObject.create({
   */
   sendData: 1,
   //handles WS message
-  handleGesture: function(message, forced) {
+  handleGesture: function(message) {
     if (this.sendData % 200 == 0){
       console.log("Kinect data being sent from kinect");
       console.log(message);
     }
     this.sendData = this.sendData +1;
-    if (this.kinectOn || forced) {
+    if (true) {
       //Set the kinect data to the raw values from the kinect
       for(var key in message){
         KinectState[key] = message[key];
