@@ -1,3 +1,4 @@
+var path = require('path');
 module.exports = {
   options: {
     imagesDir: '<%= yeoman.app %>/images',
@@ -12,6 +13,13 @@ module.exports = {
       //This allows us to compile the main file first.
       //The main file will include all the others to compile them
       cssDir: '.tmp/styles',
+    }
+  },
+  serverEmulator: {
+    options: {
+      specify: [path.join(__dirname, '../../templates/emulator/emulator.scss')],
+      sassDir: path.join(__dirname, '../../templates/emulator/'),
+      cssDir: '.tmp/emulator/',
     }
   },
   serverApp: {
@@ -37,5 +45,12 @@ module.exports = {
       importPath: ['<%= yeoman.dist %>/styles', '<%= yeoman.dist %>/<%= grunt.config("currentApp") %>/components' ],
       cssDir: '<%= yeoman.dist %>/<%= grunt.config("currentApp") %>/styles/'
     }
-  }
+  },
+  distEmulator: {
+    options: {
+      specify: [path.join(__dirname, '../../templates/emulator/emulator.scss')],
+      sassDir: path.join(__dirname, '../../templates/emulator/'),
+      cssDir: '<%= yeoman.dist %>/emulator/',
+    }
+  },
 };
