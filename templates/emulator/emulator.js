@@ -77,12 +77,16 @@ var mouse = "right";
 var mouseX;
 var mouseY;
 
+var shortcutsActive = true;
+
 function getAdmo() {
   if (!Admo)
     Admo = window.frames[0].AdmoApp;
 }
 
 function setKinect() {
+  $('.phase.active').removeClass('active'); // Deactivate previous button
+  $('#kinect').addClass('active'); // Activate new button
   KinectState.phase = 0;
   Admo.toggleKinect(true);
 }
@@ -91,10 +95,8 @@ function setPhase(newPhase) {
   KinectState.phase = newPhase;
   Storage.set('phase',newPhase);
   Admo.toggleKinect(false);
-  for(var i=0; i < 3; i++){
-    $('#phase-'+(i+1)).removeClass('active');
-  }
-  $('#phase-'+newPhase).addClass('active');
+  $('.phase.active, #kinect').removeClass('active'); // Deactivate previous button
+  $('#phase-'+newPhase).addClass('active'); // Activate new button
   setGesture();
   sendData();
 }
@@ -137,24 +139,24 @@ function sendData() {
 
 function setHead() {
   $('#head').addClass('active');
-  $('#left').removeClass('active');
-  $('#right').removeClass('active');
+  $('#left-hand').removeClass('active');
+  $('#right-hand').removeClass('active');
   mouse = 'head';
   Storage.set('mouse',mouse);
 }
 
 function setLeft() {
   $('#head').removeClass('active');
-  $('#left').addClass('active');
-  $('#right').removeClass('active');
+  $('#left-hand').addClass('active');
+  $('#right-hand').removeClass('active');
   mouse = 'left';
   Storage.set('mouse',mouse);
 }
 
 function setRight() {
   $('#head').removeClass('active');
-  $('#left').removeClass('active');
-  $('#right').addClass('active');
+  $('#left-hand').removeClass('active');
+  $('#right-hand').addClass('active');
   mouse = 'right';
   Storage.set('mouse',mouse);
 }
@@ -170,8 +172,22 @@ function setMouse(mouseStuff){
   sendData();
 }
 
+function editDepth() {
+  $('#show-depth').hide();
+  $('#edit-depth').show();
+  $('#depth-input').val(KinectState.head.z);
+  $('#depth-input').focus().select();
+  shortcutsActive = false;
+}
+
+function showDepth() {
+  $('#show-depth').show();
+  $('#edit-depth').hide();
+  shortcutsActive = true;
+}
+
 function setDepth() {
-  var temp = parseInt(document.getElementById("set_depth").value);
+  var temp = parseInt(document.getElementById("depth-input").value);
 
   if((temp > zMinimumDistance) && (temp < zMaximumDistance)){
 
@@ -180,8 +196,24 @@ function setDepth() {
     KinectState.head.z = temp;
 
     console.log("Depth set to :" + temp);
+
+    $('#show-depth').text('Depth: ' + temp + 'mm');
+    showDepth();
   }
 
+}
+
+function toggleSelectScreen() {
+  $('#select-screen').toggle();
+}
+
+function changeScreen(key) {
+  console.log(key);
+  Storage.set('currentScreen',key);
+  Admo.setScreen(Admo.Screens[key]);
+
+  $('#current-screen .text').text(Admo.Utils.dashize(key));
+  $('#select-screen').hide();
 }
 
 $(function () {
@@ -195,12 +227,13 @@ $(function () {
     }
   });
 
-  $('#screens').change(function(){
-    var key = $(this).val();
-    console.log(key);
-    Storage.set('currentScreen',key);
-    Admo.setScreen(Admo.Screens[key]);
-  });
+
+  // Update depth display
+  depth = KinectState.head.z;
+  KinectState.leftHand.z = depth;
+  KinectState.rightHand.z = depth;
+  KinectState.head.z = depth;
+  $('#show-depth').text('Depth: ' + depth + 'mm');
 
 
 
@@ -217,26 +250,38 @@ $(function () {
     //TODO: Post event rather.
     window.setTimeout(function(){
       var currentScreen =  Storage.get('currentScreen');
+
       for(var key in Admo.Screens){
          var screen = Admo.Screens[key];
-         var x = $('<option/>').val(key).html(Admo.Utils.dashize(key));
-         if(currentScreen == key){
-            x.attr('selected','selected');
-         }
-         x.appendTo('#screens');
+
+         var x = $('<div>');
+         x.text(Admo.Utils.dashize(key));
+         x.data('key', key);
+         if (key == currentScreen)
+          x.addClass('active');
+         x.on('click', function() {
+            var key = $(this).data('key');
+            changeScreen(key);
+         });
+         x.appendTo('#select-screen');
       }
       if(currentScreen && Admo.Screens[currentScreen]){
-        Admo.setScreen(Admo.Screens[currentScreen]);
+        changeScreen(currentScreen);
       }
     }, 400);
   });
 
   $(document).on('keydown', function(event) {
-    if (event.keyCode == 49) // '1'
-      setHead();
-    else if (event.keyCode == 50) // '2'
-      setLeft();
-    else if (event.keyCode == 51) // '3'
-      setRight();
+    if (shortcutsActive) {
+      if (event.keyCode == 49) // '1'
+        setHead();
+      else if (event.keyCode == 50) // '2'
+        setLeft();
+      else if (event.keyCode == 51) // '3'
+        setRight();
+    } else {
+      if (event.keyCode == 13) // Enter – submit depth input field
+        setDepth()
+    }
   })
 });

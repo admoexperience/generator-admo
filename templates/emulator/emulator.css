@@ -1,17 +1,105 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: -webkit-linear-gradient(top left, #556, #001);
-  font: 14px 'Segoe UI Light', Helvetica, Arial, sans-serif;
+  font: 16px Helvetica, Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+#header{
+  height: 60px;
+  background-color: #414042;
+}
+
+.head-container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 1400px;
+  padding-top: 12px;
+}
+
+#content{
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1400px;
+}
+
+button {
+  width: 180px;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid rgb(200,200,200);
+  color: #939598;
+  font-size: 14px;
+  outline: none;
+  -webkit-transition: background-color 100ms;
+}
+button:hover {
+  background-color: #ffffff;
+}
+button:active {
+  background-color: #0E7AC4;
+  color: #ffffff;
+  border-color: #0E7AC4;
+}
+button.active {
+  background-color: #46a9dd;
+  color: #ffffff;
+  border-color: #46a9dd;
 }
 
 
+#left{
+  float: left;
+  width: 180px;
+  padding-right: 30px;
+}
+
+#current-screen {
+  margin-top: 40px;
+  text-align: left;
+  overflow: hidden;
+  padding-top: 1px;
+  padding-left: 10px;
+}
+#current-screen .icon {
+  float: right;
+  width: 11px;
+  height: 11px;
+  background: url(arrow.png) center no-repeat;
+  position: relative;
+  top: 4px;
+  right: 10px;
+}
+
+
+#select-screen {
+  display: none;
+  width: 180px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #939598;
+  font-size: 14px;
+  text-align: left;
+  -webkit-transition: background-color 100ms;
+}
+#select-screen div {
+  padding: 0 12px;
+  height: 38px;
+  line-height: 40px;
+  cursor: default;
+}
+#select-screen div:hover {
+  color: #46a9dd;
+}
+
 #screen {
+  float: left;
   width: 960px;
   height: 540px;
-  margin: 20px auto;
-  border: 5px solid #444;
-  outline: 1px solid black;
+  border: 10px solid #ffffff;
   overflow: hidden;
 }
 #iframe {
@@ -24,38 +112,66 @@ html, body {
   -webkit-transform: scale(0.5);
 }
 
+#right{
+  padding-left: 30px;
+  width: 180px;
+  float: right;
+}
+#right .actions{
+  margin: 40px 0 40px 0;
+}
+
+#show-depth{
+  width: 178px;
+  height: 38px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid rgb(200,200,200);
+  color: #939598;
+  font-size: 14px;
+  outline: none;
+  text-align: center;
+  line-height: 40px;
+  -webkit-transition: background-color 100ms;
+}
+#show-depth:hover {
+  background-color: #ffffff;
+}
+#edit-depth {
+  display: none;
+}
+#depth-input {
+  width: 119px;
+  height: 28px;
+  margin-bottom: 8px;
+  border-radius: 5px 0 0 5px;
+  background-color: #ffffff;
+  border: 1px solid rgb(200,200,200);
+  border-right: none;
+  color: #939598;
+  font-size: 14px;
+  outline: none;
+  line-height: 30px;
+  padding: 5px 10px;
+  float: left;
+}
+#set-depth {
+  width: 40px;
+  border-radius: 0 5px 5px 0;
+  background-color: #46a9dd;
+  border: 1px solid #46a9dd;
+  color: #ffffff;
+  float: left;
+}
+#set-depth:active {
+  background-color: #0E7AC4;
+  border-color: #0E7AC4;
+}
+
 #kinect-data{
+  display: none;
   position: absolute;
   left: 10px;
   top: 10px;
-}
-
-#controls {
-  text-align: center;
-}
-#controls button {
-  font-family: 'SegoeUI';
-  font-size: 16px;
-  padding: 5px 10px;
-  margin: 10px 15px;
-}
-#controls button.toggle {
-  margin-left: 0;
-  margin-right: 0;
-}
-#controls button.left {
-  margin-left: 80px;
-  margin-right: 0;
-}
-#controls button.right {
-  margin-left: 0;
-}
-#controls button.active {
-  -webkit-filter: brightness(-0.3);
-}
-#controls button.swiperight {
-  margin-left: 0;
-}
-#controls button.swipeleft {
-  margin-left: 0;
 }

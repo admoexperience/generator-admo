@@ -3,31 +3,63 @@
 <head>
     <title>Admo Emulator</title>
     <script src="/bower/jquery.min.js"></script>
-    <script src="emulator.js"></script>
+    <script src="/emulator/emulator.js"></script>
 
     <link rel="stylesheet" href="emulator.css">
 </head>
-<body onselectstart="return false;">
-  <div id="screen">
-      <iframe src="/" width="960" height="540" id="iframe"></iframe>
+
+<body onselectstart="return false;" class="emulator">
+
+  <div id="header">
+    <div class="head-container">
+      <img src="/emulator/logo.png">
+    </div>
   </div>
+
+<div id="content">
+
+  <div id="left">
+      <button onclick="setPhase(1)" id="phase-1" type="button" class="phase">Phase 1</button>
+      <button onclick="setPhase(2)" id="phase-2" type="button" class="phase">Phase 2</button>
+      <button onclick="setPhase(3)" id="phase-3" type="button" class="phase">Phase 3</button>
+      <button onclick="setKinect()" type="button" id="kinect">Kinect</button>
+
+      <button id="current-screen" onclick="toggleSelectScreen()" type="button" class="active">
+        <span class="icon"></span>
+        <span class="text"></span>
+      </button>
+      <div id="select-screen"></div>
+
+  </div>
+
+
+  <div id="screen">
+    <iframe src="/" width="960" height="540" id="iframe"></iframe>
+  </div>
+
+  <div id="right">
+    <button onclick="setHead()" type="button" id="head">Head</button>
+    <button onclick="setLeft()" type="button" id="left-hand">Left Hand</button>
+    <button onclick="setRight()" type="button" id="right-hand" class="active">Right Hand</button>
+
+    <div class="actions">
+      <button onclick="swipeLeft()" type="button" id="swipe-left">Swipe Left</button>
+      <button onclick="swipeRight()" type="button" id="swipe-right">Swipe Right</button>
+    </div>
+
+    <div class="depth">
+      <div id="show-depth" onclick="editDepth()">Depth: 1200mm</div>
+      <div id="edit-depth">
+        <input id="depth-input" type="text" name="depth" />
+        <button type="button" onclick="setDepth()" id="set-depth">Set</button>
+      </div>
+    </div>
+
+  </div>
+
   <div id="kinect-data"></div>
-  <div id="controls">
 
-    <select id="screens"></select>
-    <button onclick="setKinect()" type="button">Kinect</button>
-    <button onclick="setPhase(1)" id="phase-1" type="button" class="toggle">Phase 1</button>
-    <button onclick="setPhase(2)" id="phase-2"  type="button" class="toggle">Phase 2</button>
-    <button onclick="setPhase(3)" id="phase-3" type="button" class="toggle">Phase 3</button>
+</div>
 
-    <button onclick="setHead()" type="button" id="head" class="toggle left">Head</button>
-    <button onclick="setLeft()" type="button" id="left" class="toggle">Left Hand</button>
-    <button onclick="setRight()" type="button" id="right" class="toggle right active">Right Hand</button>
-    <button onclick="swipeLeft()" type="button" id="swipeleft" class=" swipeleft">Swipe Left</button>
-    <button onclick="swipeRight()" type="button" id="swiperight" class=" swiperight">Swipe Right</button>
-    <form id="setDepth">
-    <input id="set_depth" type="text" name="depth"><br>
-    <input type="button" onclick="setDepth()" value="Set Depth">
-    </form>
 </body>
 </html>

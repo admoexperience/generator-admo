@@ -42,6 +42,18 @@ AdmoApp.MainCtrl = function($scope) {
         //Stats.track('demoScreen');
       }
     });
+    AdmoApp.Screens.firstScreen = Screen.create({
+      components:[head],
+      shown: function(){
+        //Stats.track('demoScreen');
+      }
+    });
+    AdmoApp.Screens.secondScreen = Screen.create({
+      components:[handRight,handLeft],
+      shown: function(){
+        //Stats.track('demoScreen');
+      }
+    });
 
     /**********STATE SCREEN HANDLER***************/
 
