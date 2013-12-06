@@ -102,10 +102,12 @@ function setPhase(newPhase) {
 }
 
 function swipeRight(){
+  console.log('Swipe right');
   Admo.swipeGesture('SwipeToRight');
 }
 
 function swipeLeft(){
+  console.log('Swipe left');
   Admo.swipeGesture('SwipeToLeft');
 }
 
@@ -216,6 +218,18 @@ function changeScreen(key) {
   $('#select-screen').hide();
 }
 
+var shortcutsVisible = false;
+function toggleShortcuts() {
+  if (shortcutsVisible) {
+    $('#shortcut-screen').fadeOut();
+    shortcutsVisible = false;
+  } else {
+    $('#shortcut-screen').fadeIn();
+    shortcutsVisible = true;
+  }
+}
+
+
 $(function () {
   $(document).keyup(function(evt) {
     if (evt.keyCode == 32) {
@@ -271,6 +285,7 @@ $(function () {
     }, 400);
   });
 
+  //Keyboard Shortcuts
   $(document).on('keydown', function(event) {
     if (shortcutsActive) {
       if (event.keyCode == 49) // '1'
@@ -279,6 +294,11 @@ $(function () {
         setLeft();
       else if (event.keyCode == 51) // '3'
         setRight();
+      else if (event.keyCode == 37) // Left
+        swipeLeft();
+      else if (event.keyCode == 39) // Right
+        swipeRight();
+
     } else {
       if (event.keyCode == 13) // Enter – submit depth input field
         setDepth()
