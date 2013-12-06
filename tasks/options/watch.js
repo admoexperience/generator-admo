@@ -2,7 +2,11 @@ var path = require('path');
 module.exports = {
   compass: {
     files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
-    tasks: ['compass:serverMain','compass:serverApp']
+    tasks: ['compass:serverMain','compass:serverApp','compass:serverEmulator']
+  },
+  emulator:{
+    files: [path.join(__dirname, '../../templates/emulator/emulator.scss')],
+    tasks: ['compass:serverEmulator','livereload']
   },
   livereload: {
     files: [
@@ -31,7 +35,10 @@ module.exports = {
     }
   },
   admoFramework: {
-    files: [path.join(__dirname, '../../templates/**')],
+    files: [
+      path.join(__dirname, '../../templates/**'),
+      '!**/*/emulator.scss'
+    ],
     tasks: ['copy:admoFramework','preprocess:admoConfigLive','preprocess:admoIndexLive'],
     options: {
       livereload: true
