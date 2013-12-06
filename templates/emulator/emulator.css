@@ -99,7 +99,7 @@ button.active {
   float: left;
   width: 960px;
   height: 540px;
-  border: 10px solid #ffffff;
+  border: 10px solid #414042;
   overflow: hidden;
 }
 #iframe {
@@ -167,6 +167,17 @@ button.active {
 #set-depth:active {
   background-color: #0E7AC4;
   border-color: #0E7AC4;
+}
+
+#shortcuts{
+  float: right;
+  padding: 10px 30px 0 0;
+  font-size: 14px;
+  color: #939598;
+}
+
+#shortcuts:hover{
+  color: rgb(200,200,200);
 }
 
 #kinect-data{
