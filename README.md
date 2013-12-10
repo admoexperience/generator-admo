@@ -1,6 +1,6 @@
-# generator-admo
+# Generator-admo
 
-A generator for [Yeoman](http://yeoman.io).
+A [AdmoApplication](https://github.com/admoexperience) generator for [Yeoman](http://yeoman.io).
 
 ## Initial dev setup
 
@@ -19,66 +19,63 @@ Install [nvm](https://github.com/creationix/nvm) the Node Version Manager which 
 
 ####Install `Compass`:
 
-This *will* require a working version of ruby. we are currently using `2.0.0-p247`
+This *will* require a working version of ruby. we are currently using `2.0.0-p*` Make sure you add `$rubyInstall/bin/` to your path, this might be possible during installation
 
 **Windows:** [Ruby Installer](http://rubyinstaller.org/downloads/)
 
 **Mac:** [RBENV](https://github.com/sstephenson/rbenv) for a guide
 
-Make sure you add `$rubyInstall/bin/` to your path, this might be possible during installation
-
-Run the following from a ruby enabled console:
+**Both:** Run the following from a ruby enabled console
 
     gem install sass
     gem install compass
 
+### IDE setup
 
-The project has an `.editorconfig` file which allows all devs to share/use the same identation
-settings and such. You need to install a [Sublime plugin](https://github.com/sindresorhus/editorconfig-sublime#readme)
-that automatically reads the config file and ensures your settings are correct whenever you are
-working on the project.
+The project has an `.editorconfig` file which allows all devs to share/use the same identation settings and such. You need to install the sublime plugin [EditorConfig](https://github.com/sindresorhus/editorconfig-sublime#readme)
+that automatically reads the config file and ensures your settings are correct whenever you are working on the project.
 
 
-## Day-to-day
+## Working with Admo
 
-Working with Admo:
-
-admo
+### Create apps
   
     mkdir admo-app-$app-name
+    cd dmo-app-$app-name
     yo admo #when prompted for an appname PLEASE enter $app-name
-
     git init 
     git add .
     git commit -m "First commit empty admo project"
+    
+    
+### Using an exsisting app
 
-components
-`yo admo:component $component-name`  this will create required js + scss files, You will manually need to add them to
-`_include.html` and `main.scss`
+    cd admo-app-$app-name
+    npm install
+    grunt server
 
 
-grunt
+### Creating components
+From the project root.
 
-    grunt server     # preview it
-    grunt test       # test it
-    grunt build      # build it
+    yo admo:component $component-name  
 
-bower
+This will create required js + scss files, They should automatically be added to `_include.html` and `main.scss`
 
-    bower search <dep>          # search online JS registry
-    bower install <dep>         # installs the JS dependency locally
-    bower install --save <dep>  # installs the JS dependency and adds it to `bower.json`
-    bower install               # installs all JS dependencies listed in `bower.json`
 
+### Running and Building
+
+    grunt server     # preview it in the emulator
+    grunt build      # Compiles it and creates a ziped "pod"
 
 #### Notes
 
 `package.json` lists dependencies that are required for building, testing, etc. and are installed
 through `npm install`.
 
-`bower.json` lists JS dependencies that are required by the app, eg. `angular`, and are
+`bower.json` lists JS dependencies that are required by the app and are
 installed through `bower install`.
 
-Working with SASS in Windows
-    Add Ruby to your PATH (possible to do that in install sequence)
-    Install Compass => "gem install compass"
+### Docs 
+* ![Architecture overview](docs/structure.md)
+* ![Components js](docs/components.md)
