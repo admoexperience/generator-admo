@@ -19,7 +19,7 @@ Install [nvm](https://github.com/creationix/nvm) the Node Version Manager which 
 
 ####Install `Compass`:
 
-This *will* require a working version of ruby. we are currently using `2.0.0-p*` Make sure you add `$rubyInstall/bin/` to your path, this might be possible during installation
+This *will* require a working version of ruby. we are currently using `2.0.0-p*` Make sure you add `$rubyInstall/bin/` to your path (this might be possible during installation).
 
 **Windows:** [Ruby Installer](http://rubyinstaller.org/downloads/)
 
@@ -32,17 +32,16 @@ This *will* require a working version of ruby. we are currently using `2.0.0-p*`
 
 ### IDE setup
 
-The project has an `.editorconfig` file which allows all devs to share/use the same identation settings and such. You need to install the sublime plugin [EditorConfig](https://github.com/sindresorhus/editorconfig-sublime#readme)
-that automatically reads the config file and ensures your settings are correct whenever you are working on the project.
+The project has a `.editorconfig` file which allows different developers to share their editor settings like indentation styles. If you are using Sublime Text, install the plugin [EditorConfig](https://github.com/sindresorhus/editorconfig-sublime#readme) and it will automatically load the project settings from the config file. This ensures your settings are correct whenever you are working on the project.
 
 
 ## Working with Admo
 
-### Create apps
+### Creating a new app
   
-    mkdir admo-app-$app-name
-    cd dmo-app-$app-name
-    yo admo #when prompted for an appname PLEASE enter $app-name
+    mkdir $appName
+    cd $appName
+    yo admo #when prompted for an app name PLEASE enter $appName
     git init 
     git add .
     git commit -m "First commit empty admo project"
@@ -50,17 +49,17 @@ that automatically reads the config file and ensures your settings are correct w
     
 ### Using an exsisting app
 
-    cd admo-app-$app-name
+    cd $appName
     npm install
     grunt server
 
 
 ### Creating components
-From the project root.
+Run this command from the project root.
 
-    yo admo:component $component-name  
+    yo admo:component $component
 
-This will create required js + scss files, They should automatically be added to `_include.html` and `main.scss`
+This will create required js + sass files. They should automatically be added to `_include.html` and `main.scss`
 
 
 ### Running and Building
