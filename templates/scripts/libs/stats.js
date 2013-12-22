@@ -29,14 +29,6 @@ Stats = BaseObject.create({
     this._properties['appName'] = appName;
   },
 
-  setHost: function(unitName){
-    this.setUnitName(unitName)
-
-  },
-  setUnitName: function(unitName){
-    this._properties['unitName'] = unitName;
-  },
-
   track: function(event, properties){
 
     var props = AdmoApp.Utils.mergeObjects(this._properties,properties || {});
