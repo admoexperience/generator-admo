@@ -6,9 +6,9 @@
   "keywords": [
     "yeoman-generator"
   ],
-  "homepage": "https://bitbucket.org/fireid/admo-generator",
+  "homepage": "https://github.com/admoexperience/generator-admo",
   "bugs": {
-    "url": "https://bitbucket.org/fireid/admo-generator"
+    "url": "https://github.com/admoexperience/generator-admo"
   },
   "author": {
     "name": "David Rubin",
@@ -17,7 +17,7 @@
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:fireid/admo-generator.git"
+    "url": "git@github.com:admoexperience/generator-admo.git"
   },
   "scripts": {
     "test": "mocha"
@@ -80,12 +80,12 @@
     "yo": ">=1.0.0"
   },
   "engines": {
-    "node": ">=0.8.0",
+    "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
   "licenses": [
     {
-      "type": "NA"
+      "type": "MIT"
     }
   ],
   "readme": "",
