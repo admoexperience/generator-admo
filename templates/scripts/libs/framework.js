@@ -71,11 +71,11 @@ window.AdmoApp = BaseObject.create({
 
   handleConfig: function(config){
     AdmoConfig.cmsConfig = config;
-    //Can't include the hostname at appstart up since we wont know it then.
-    Bugsnag.metaData.unit.hostname = AdmoConfig.cmsConfig.hostname;
+    //Can't include the hostname at appstart up since we wont know it then
     console.log("Updating config to",AdmoConfig.cmsConfig);
+    Bugsnag.metaData.unit.name = AdmoConfig.cmsConfig.name;
     //TODO: Legacy value should come from the unitName
-    Stats.setUnitName(AdmoConfig.cmsConfig.hostname);
+    Stats.setUnitName(AdmoConfig.cmsConfig.name);
   },
 
   /*
