@@ -1,6 +1,6 @@
  KinectState = {
   handState: "released",
-  phase:0,
+  phase:3,
   head:{
     x:300,
     y:135,
