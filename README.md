@@ -41,5 +41,5 @@ through `npm install`.
 installed through `bower install`.
 
 ### Docs 
-* ![Architecture overview](docs/structure.md)
-* ![Dev](docs/dev.md)
+* [Architecture overview](docs/structure.md)
+* [Dev](docs/dev.md)
