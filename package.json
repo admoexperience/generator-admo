@@ -1,10 +1,14 @@
 {
   "name": "generator-admo",
-  "version": "0.0.0",
+  "version": "0.9.0",
   "description": "A generator for Yeoman",
   "private": "true",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "admo",
+    "Digital signage",
+    "kinect",
+    "kiosk"
   ],
   "homepage": "https://github.com/admoexperience/generator-admo",
   "bugs": {
@@ -90,7 +94,7 @@
   ],
   "readme": "",
   "readmeFilename": "README.md",
-  "_id": "generator-admo@0.0.0",
+  "_id": "generator-admo@0.9.0",
   "dist": {
     "shasum": "ac30d1603a172e3835aa9333b0ca5f664ad97485"
   },
