@@ -2,7 +2,6 @@
   "name": "generator-admo",
   "version": "0.9.0",
   "description": "A generator for Yeoman",
-  "private": "true",
   "keywords": [
     "yeoman-generator",
     "admo",
