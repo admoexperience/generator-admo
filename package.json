@@ -1,6 +1,6 @@
 {
   "name": "generator-admo",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator",
