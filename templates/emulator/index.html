@@ -16,6 +16,9 @@
       <div id="shortcuts" onclick="toggleShortcuts()">
         Keyboard shortcuts
       </div>
+      <div id="help-button" onclick="toggleHelp()">
+        Help
+      </div>
     </div>
   </div>
 
@@ -56,6 +59,28 @@
         <input id="depth-input" type="text" name="depth" />
         <button type="button" onclick="setDepth()" id="set-depth">Set</button>
       </div>
+    </div>
+  </div>
+
+  <div id="help-screen">
+    <div class="heading">
+      <a class="close" onclick="toggleHelp()">X</a>
+      Emulator
+      <h5> The emulator was built to simulate user input received from the Kinect. This enables developers to build Admo apps without</br>having someone dance in front of a Kinect, or even without having a Kinect plugged in.</br> Refer to explanatory index below to use the emulator</h5>
+    </div>
+    <div id="paragraphs">
+      <p> Phases </p>
+      <h5>The selected phase refers to the state of user detection.</br></br>-Phase 1 is active when no one is in view.</br>-Phase 2 is active is when something or someone is in view. The Kinect is detecting something in the depth field,</br>  but can’t detect a skeletal structure. The only input received from the Kinect in this phase is the user’s head coordinate.</br>-Phase 3 is active if someone is in view and the skeletal structure of the person is detected. </h5>
+      </br>
+      <p>Simulated Input</p>
+      <h5>The mouse can be used to simulate input such as an user’s head or hands. This can be done by selecting the appropriate button on the right hand side and moving the mouse cursor across the iframe. This will then simulate the selected body part the X-Y axes. The selected body part can be simulate on the Z-axis by changing the depth value.
+
+      It is also possible to simulate a swipe gesture by clicking on either the Swipe Left or Swipe Right button. These buttons will only be active when the phase 3 is active.</h5>
+
+      </br>
+      <p>Real Input</p>
+      <h5>In order to receive real Kinect data inside the emulator, the gesture engine needs to be running on the same machine on which the emulator is running. If the gesture engine is running you’ll be able to click on the Kinect button to toggle between the Kinect data and simulated data.</h5>
+
     </div>
   </div>
 

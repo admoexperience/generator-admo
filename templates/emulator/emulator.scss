@@ -183,6 +183,18 @@ button.active {
   }
 }
 
+#help-button{
+  float: right;
+  padding: 10px 30px 0 0;
+  font-size: 14px;
+  color: #939598;
+  cursor: default;
+
+  &:hover{
+    color: rgb(200,200,200);
+  }
+}
+
 
 #shortcut-screen{
   position:absolute;
@@ -215,6 +227,54 @@ button.active {
   }
 }
 
+#help-screen{
+  position:absolute;
+  width: 920px;
+  height: 600px;
+  background-color: #414042;
+  border-radius: 3px;
+  top: 60px;
+  margin: 0 auto;
+  left: 0; right: 0;
+  display: none;
+  color: rgb(210,210,210);
+
+
+  h5{
+    margin: 10px 0px 0px 0px;
+    font-weight: normal;
+    cursor: default;
+    font-size: 14px;
+    line-height: 1.4em;
+  }
+
+  p{
+    margin-top: 0px
+  }
+
+  .heading{
+    font-size: 16px;
+    padding:20px 20px 20px 20px;
+    border-bottom: 1px solid #939598;
+
+    a{
+      float: right;
+      cursor: default;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  table{
+    padding: 20px 0 0 20px;
+  }
+
+  #paragraphs{
+    padding: 20px 100px 0 20px;
+
+  }
+}
 
 #kinect-data{
   display: none;

@@ -229,6 +229,17 @@ function toggleShortcuts() {
   }
 }
 
+var helpVisible = false;
+function toggleHelp() {
+  if (helpVisible) {
+    $('#help-screen').fadeOut();
+    helpVisible = false;
+  } else {
+    $('#help-screen').fadeIn();
+    helpVisible = true;
+  }
+}
+
 
 $(function () {
   $(document).keyup(function(evt) {
@@ -253,6 +264,13 @@ $(function () {
 
   // Hacked delay to let the child frame finish loading
    $('#iframe').load(function(){
+    var helpDisplayed =  Storage.get('helpDisplayed');
+    if(!helpDisplayed){
+      Storage.set('helpDisplayed',new Date());
+      toggleHelp();
+    }
+
+
     console.log('laod the iframe');
     getAdmo();
     var phase = Storage.get('phase') || 1;
